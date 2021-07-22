@@ -12,6 +12,7 @@ import com.nas.naisak.commonmodels.ModelWithPageNumberOnly
 import com.nas.naisak.commonmodels.StudentListModel
 import com.nas.naisak.fragment.aboutus.model.NAEResponseModel
 import com.nas.naisak.fragment.calendar.model.CalendarResponseModel
+import com.nas.naisak.fragment.calendar.model.TermCalendarResponseModel
 import com.nas.naisak.fragment.communications.model.CommunicationResponseModel
 import com.nas.naisak.fragment.contactus.model.Contactusresponse
 import com.nas.naisak.fragment.home.model.Bannerresponse
@@ -120,6 +121,13 @@ interface ApiInterface {
     fun naeDetails(
         @Header("Authorization") token:String
     ): Call<NAEResponseModel>
+
+    /*************NAE  DETAILS****************/
+    @GET("api/v1/parent/term_calendar")
+    @Headers("Content-Type: application/x-www-form-urlencode","Accept: application/json")
+    fun termCalendar(
+        @Header("Authorization") token:String
+    ): Call<TermCalendarResponseModel>
 
     /*************NAE  DETAILS****************/
     @GET("api/v1/parent/parentessential/get/parent_essentials")

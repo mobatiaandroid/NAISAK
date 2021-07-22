@@ -85,6 +85,10 @@
         android:name=".fragment.settings.TermsOfServiceActivity"
         android:screenOrientation="portrait"
         android:theme="@style/AppTheme.NoActionBar" />
+    <activity
+        android:name=".fragment.calendar.TermCalendarActivity"
+        android:screenOrientation="portrait"
+        android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".activity.notification.ImageNotificationActivity"
