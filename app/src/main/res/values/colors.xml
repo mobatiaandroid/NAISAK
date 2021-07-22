@@ -28,5 +28,6 @@
     <color name="cal_row_1">#e67d4c</color>
     <color name="cal_row_2">#6e2e86</color>
     <color name="cal_row_3">#E21459</color>
-
+    <color name="title_bar_bg">#2E2EFE</color>
+    <color name="action_bar_title">#FFFFFF</color>
 </resources>

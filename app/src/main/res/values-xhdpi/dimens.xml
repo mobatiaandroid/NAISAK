@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="first_day_margin">5dp</dimen>
+    <dimen name="day_margin">20dp</dimen>
+    <dimen name="text_height_width">30dp</dimen>
+    <dimen name="min_cell_height">40dp</dimen>
+    <dimen name="min_cell_width">40dp</dimen>
+    <dimen name="titleheight">25dp</dimen>
+    <dimen name="home_button_reg_long_width">176dp</dimen>
+    <!--
+        <dimen name="home_button_reg_long_height">96dp</dimen>
+    -->
+    <dimen name="home_button_reg_long_height">90dp</dimen>
+
+    <dimen name="home_button_reg_short_width">87dp</dimen>
+    <!--<dimen name="home_button_reg_short_height">96dp</dimen>-->
+    <dimen name="home_button_reg_short_height">90dp</dimen>
+    <dimen name="list_img_width">60dp</dimen>
+    <dimen name="list_img_height">60dp</dimen>
+    <dimen name="const_list_img_width">35dp</dimen>
+    <dimen name="const_list_img_height">35dp</dimen>
+    <dimen name="const_list_home_img_width">26dp</dimen>
+    <dimen name="const_list_home_img_height">26dp</dimen>
+    <!--
+        <dimen name="home_banner_height">210dp</dimen>
+    -->
+    <dimen name="home_banner_height">230dp</dimen>
+
+    <dimen name="const_api_list_img_width">100dp</dimen>
+    <dimen name="const_api_list_img_height">100dp</dimen>
+    <dimen name="spinner_btn_height">52dp</dimen>
+    <dimen name="spinner_height">45dp</dimen>
+    <dimen name="spinner_btn_width">180dp</dimen>
+    <dimen name="action_bar_height">80dp</dimen>
+    <dimen name="action_bar_menu_width">40dp</dimen>
+    <dimen name="action_bar_menu_height">40dp</dimen>
+    <dimen name="toggle_button_width">78dp</dimen>
+    <dimen name="toggle_button_height">41dp</dimen>
+    <dimen name="banner_height">170dp</dimen>
+    <dimen name="home_circle_width">20dp</dimen>
+    <dimen name="home_circle_height">20dp</dimen>
+
+</resources>

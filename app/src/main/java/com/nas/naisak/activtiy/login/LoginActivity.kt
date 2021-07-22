@@ -37,7 +37,6 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
 
     lateinit var mContext: Context
-
     lateinit var emailHelpImg:Button
     lateinit var signupImg:Button
     lateinit var forgotPasswordImg:Button
