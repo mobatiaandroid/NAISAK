@@ -6,7 +6,6 @@
     android:background="@color/white">
     <RelativeLayout
         android:id="@+id/titleRel"
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.nas.naisak.customviews.textview.CustomFontDJ5TextWhite
@@ -30,6 +29,7 @@
             android:layout_alignParentRight="true"
             android:background="@drawable/infoptaicon"/>
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/commonRel"
         android:layout_width="match_parent"
@@ -353,5 +353,18 @@
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center">
+        <include
+            android:id="@+id/progressDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            layout="@layout/custom_progress_layout"
+            android:visibility="visible" />
+
+    </LinearLayout>
 
 </RelativeLayout>

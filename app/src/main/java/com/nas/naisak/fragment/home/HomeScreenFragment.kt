@@ -1879,9 +1879,19 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
             when (intentTabId)
             {
 
+
                 NasTabConstants.TAB_CALENDAR_REG -> {
-                    mFragment = CalendarFragment()
-                    fragmentIntent(mFragment)
+                    if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_CALENDAR) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext,
+                            Manifest.permission.WRITE_CALENDAR
+                        ) != PackageManager.PERMISSION_GRANTED) {
+                        checkcalpermission()
+
+
+                    } else {
+                        mFragment = CalendarFragment()
+                        fragmentIntent(mFragment)
+                    }
+
                 }
                 NasTabConstants.TAB_COMMUNICATIONS_REG -> {
                     mFragment = CommunicationFragment()
@@ -1892,8 +1902,17 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
                     fragmentIntent(mFragment)
                 }
                 NasTabConstants.TAB_TRIPS_REG -> {
-                    mFragment = PaymentFragment()
-                    fragmentIntent(mFragment)
+                    if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(mContext,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                        ) != PackageManager.PERMISSION_GRANTED) {
+                        checkpaypermission()
+
+
+                    } else {
+                        mFragment = PaymentFragment()
+                        fragmentIntent(mFragment)
+                    }
+
                 }
                 NasTabConstants.TAB_PARENT_ESSENTIALS_REG -> {
                     mFragment = ParentsEssentialsFragment()
@@ -1958,6 +1977,42 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
                     Manifest.permission.ACCESS_FINE_LOCATION,
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.CALL_PHONE
+                ),
+                123
+            )
+        }
+    }
+    private fun checkcalpermission() {
+        if (ContextCompat.checkSelfPermission(
+                mContext,
+                Manifest.permission.READ_CALENDAR
+            ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                mContext,
+                Manifest.permission.WRITE_CALENDAR
+            ) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this.activity!!,
+                arrayOf(
+                    Manifest.permission.WRITE_CALENDAR,
+                    Manifest.permission.READ_CALENDAR
+                ),
+                123
+            )
+        }
+    }
+    private fun checkpaypermission() {
+        if (ContextCompat.checkSelfPermission(
+                mContext,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(
+                mContext,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                this.activity!!,
+                arrayOf(
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ),
                 123
             )

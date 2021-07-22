@@ -8,7 +8,7 @@ class ClassNameConstants {
         var NOTIFICATIONS = "Notifications"
         var COMMUNICATIONS = "Communications"
         var PARENT_ESSENTIALS = "Parent Essentials"
-        var ABOUT_US = "About Us"
+        var ABOUT_US = "Nord Anglia Education"
         var SETTINGS = "Settings"
         var LOGOUT = "Logout"
         var CONTACT_US = "Contact us"

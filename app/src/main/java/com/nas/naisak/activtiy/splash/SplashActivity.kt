@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.nas.naisak.R
 import com.nas.naisak.activtiy.home.HomeActivity
 import com.nas.naisak.activtiy.login.LoginActivity
+import com.nas.naisak.activtiy.tutorial.TutorialActivity
 import com.nas.naisak.constants.PreferenceManager
 
 class SplashActivity : AppCompatActivity() {
@@ -22,9 +23,10 @@ class SplashActivity : AppCompatActivity() {
         mContext=this
         Handler(Looper.myLooper()!!).postDelayed({
 
-         if(PreferenceManager.getIsFirstLaunch(mContext))
+         if(!PreferenceManager.getIsFirstLaunch(mContext))
          {
-             startActivity(Intent(this, LoginActivity::class.java))
+             PreferenceManager.isFirstLaunch(mContext,true)
+             startActivity(Intent(this, TutorialActivity::class.java))
              finish()
          }
           else

@@ -36,11 +36,12 @@
         <activity
             android:name=".activtiy.login.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activtiy.home.HomeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".activity.notification.VideoNotificationActivity"
             android:screenOrientation="portrait"
@@ -80,6 +81,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activtiy.tutorial.TutorialActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".fragment.calendar.CalendarTutorialActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

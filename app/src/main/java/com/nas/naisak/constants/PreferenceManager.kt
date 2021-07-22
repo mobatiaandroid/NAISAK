@@ -21,7 +21,19 @@ class PreferenceManager {
             val prefs = context.getSharedPreferences(PREFSNAME, Context.MODE_PRIVATE)
             return prefs.getBoolean("is_first_launch", false)
         }
-
+        /*************************CALENDAR First Launch************************/
+        fun isCalendarFirstLaunch(context: Context, isFirstLaunch: Boolean)
+        {
+            val prefs = context.getSharedPreferences(PREFSNAME, Context.MODE_PRIVATE)
+            val editor = prefs.edit()
+            editor.putBoolean("is_cal_first_launch", isFirstLaunch)
+            editor.apply()
+        }
+        fun getIsCalendarFirstLaunch(context: Context): Boolean
+        {
+            val prefs = context.getSharedPreferences(PREFSNAME, Context.MODE_PRIVATE)
+            return prefs.getBoolean("is_cal_first_launch", false)
+        }
         /*************************USER CODE************************/
         fun setUserCode(context: Context, usercode: String?) {
             val prefs = context.getSharedPreferences(PREFSNAME, Context.MODE_PRIVATE)

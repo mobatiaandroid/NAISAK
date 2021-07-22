@@ -1,6 +1,7 @@
 package com.nas.naisak.activtiy.login
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.content.ComponentName
 import android.content.Context
@@ -34,7 +35,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity :Activity() {
 
     lateinit var mContext: Context
     lateinit var emailHelpImg:Button

@@ -69,7 +69,7 @@ class CommonMethods {
             dialog.show()
         }
 
-        fun showDialogueWithOk(context: Context,message : String,msgHead : String)
+        fun showDialogueWithOk(context: Context, message: String, msgHead: String)
         {
             val dialog = Dialog(context)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -90,6 +90,15 @@ class CommonMethods {
         }
         fun isEmailValid(email: String): Boolean {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        }
+
+        fun htmlparsing(text: String): String? {
+            var encodedString: String
+            encodedString = text.replace("&lt;".toRegex(), "<")
+            encodedString = encodedString.replace("&gt;".toRegex(), ">")
+            encodedString = encodedString.replace("&amp;".toRegex(), "")
+            encodedString = encodedString.replace("amp;".toRegex(), "")
+            return encodedString
         }
     }
 }

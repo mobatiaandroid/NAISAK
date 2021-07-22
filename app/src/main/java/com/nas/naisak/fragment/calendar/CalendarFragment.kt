@@ -18,6 +18,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nas.naisak.R
+import com.nas.naisak.activtiy.home.HomeActivity
+import com.nas.naisak.activtiy.login.LoginActivity
+import com.nas.naisak.activtiy.tutorial.TutorialActivity
 import com.nas.naisak.constants.ApiClient
 import com.nas.naisak.constants.CommonMethods
 import com.nas.naisak.constants.PreferenceManager
@@ -49,6 +52,7 @@ class CalendarFragment  : Fragment() {
     lateinit var dayListView: ListView
     lateinit var yearListView: ListView
     lateinit var commonRelList: RelativeLayout
+    lateinit var progressDialog: RelativeLayout
     lateinit var linearLayoutManager: LinearLayoutManager
     var monthSpinSelect:Boolean=true
     var yearSpinSelect:Boolean=true
@@ -65,6 +69,9 @@ class CalendarFragment  : Fragment() {
     lateinit var yearSpinner:TextView
     lateinit var monthSpinner:TextView
     lateinit var mAddAllEvents:ImageView
+    lateinit var infoImg:ImageView
+    lateinit var clearData:ImageView
+    var isClicked:Boolean=false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -75,8 +82,16 @@ class CalendarFragment  : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mContext = requireContext()
+        if(!PreferenceManager.getIsCalendarFirstLaunch(mContext))
+        {
+            PreferenceManager.isCalendarFirstLaunch(mContext,true)
+            val intent = Intent(activity, CalendarTutorialActivity::class.java)
+            activity?.startActivity(intent)
+        }
         initialiseUI()
         if (CommonMethods.isInternetAvailable(mContext)) {
+            isClicked=true
             callCalendarDetail()
         } else {
             CommonMethods.showSuccessInternetAlert(mContext)
@@ -85,7 +100,7 @@ class CalendarFragment  : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun initialiseUI() {
-        mContext = requireContext()
+
         isSelectedSpinner=false
         mListView=view?.findViewById(R.id.calList) as RecyclerView
         monthListView=view?.findViewById(R.id.monthListView) as ListView
@@ -96,25 +111,146 @@ class CalendarFragment  : Fragment() {
         yearSpinner=view?.findViewById(R.id.yearSpinner) as TextView
         monthSpinner=view?.findViewById(R.id.monthSpinner) as TextView
         mAddAllEvents=view?.findViewById(R.id.addAllBtn) as ImageView
+        infoImg=view?.findViewById(R.id.infoImg) as ImageView
+        clearData=view?.findViewById(R.id.clearData) as ImageView
         commonRelList=view?.findViewById(R.id.commonRelList) as RelativeLayout
+        progressDialog=view?.findViewById(R.id.progressDialog) as RelativeLayout
+        val aniRotate: Animation =
+            AnimationUtils.loadAnimation(mContext, R.anim.linear_interpolator)
+        progressDialog.startAnimation(aniRotate)
+        progressDialog.visibility=View.VISIBLE
         linearLayoutManager = LinearLayoutManager(mContext)
         mListView.layoutManager = linearLayoutManager
         selectedMonth="MONTH"
         selectedYear="YEAR"
-        val aniRotate: Animation =
-            AnimationUtils.loadAnimation(mContext, R.anim.linear_interpolator)
 
         mTermCalendar.setOnClickListener(View.OnClickListener {
 
-            val intent = Intent(activity, TermCalendarActivity::class.java)
-            activity?.startActivity(intent)
+            if (!isClicked)
+            {
+                val intent = Intent(activity, TermCalendarActivity::class.java)
+                activity?.startActivity(intent)
+            }
+
         })
         populateMonthSpinner()
         populateYearSpinner()
         populateDaySpinner()
-        mAddAllEvents.setOnClickListener(View.OnClickListener {
+        clearData.setOnClickListener(View.OnClickListener {
+            if (!isClicked)
+            {
+                commonRelList.visibility=View.GONE
+                dayListView.visibility=View.GONE
+                monthListView.visibility=View.GONE
+                yearListView.visibility=View.GONE
+                daySpinner.setText("DAY")
+                monthSpinner.setText("MONTH")
+                yearSpinner.setText("YEAR")
+                isSelectedSpinner=false
+                selectedMonth="MONTH"
+                selectedYear="YEAR"
+                tempArrayList.clear()
+                mListView.visibility=View.VISIBLE
+                val calendarAdapter = CalendarListAdapter(mContext, calendarDetailArrayListUse)
+                calendarAdapter.notifyDataSetChanged()
+                mListView.adapter = calendarAdapter
+            }
 
-         var mEventAdded:Boolean=false
+
+        })
+
+        daySpinner.setOnClickListener(View.OnClickListener {
+
+            if (!isClicked)
+            {
+                if (daySpinSelect)
+                {
+                    commonRelList.visibility=View.VISIBLE
+                    dayListView.visibility=View.VISIBLE
+                    monthListView.visibility=View.GONE
+                    yearListView.visibility=View.GONE
+                    daySpinSelect=false
+                    populateDaySpinner()
+
+                }
+                else{
+                    daySpinSelect=true
+                    commonRelList.visibility=View.GONE
+                    dayListView.visibility=View.GONE
+                }
+            }
+
+        })
+        monthSpinner.setOnClickListener(View.OnClickListener {
+
+            if(!isClicked)
+            {
+                if (monthSpinSelect)
+                {
+                    commonRelList.visibility=View.VISIBLE
+                    monthListView.visibility=View.VISIBLE
+                    dayListView.visibility=View.GONE
+                    yearListView.visibility=View.GONE
+                    monthSpinSelect=false
+                    populateMonthSpinner()
+
+                }
+                else{
+                    monthSpinSelect=true
+                    commonRelList.visibility=View.GONE
+                    monthListView.visibility=View.GONE
+                }
+            }
+
+        })
+
+        yearSpinner.setOnClickListener(View.OnClickListener {
+            if(!isClicked)
+            {
+                if (yearSpinSelect)
+                {
+                    commonRelList.visibility=View.VISIBLE
+                    yearListView.visibility=View.VISIBLE
+                    dayListView.visibility=View.GONE
+                    monthListView.visibility=View.GONE
+                    yearSpinSelect=false
+                    populateYearSpinner()
+
+                }
+                else{
+                    yearSpinSelect=true
+                    commonRelList.visibility=View.GONE
+                    yearListView.visibility=View.GONE
+                }
+            }
+
+        })
+        infoImg.setOnClickListener(View.OnClickListener {
+            if (!isClicked)
+            {
+                val intent = Intent(activity, CalendarTutorialActivity::class.java)
+                activity?.startActivity(intent)
+            }
+
+        })
+        mAddAllEvents.setOnClickListener(View.OnClickListener {
+            var mEventAdded:Boolean=false
+            if(calendarDetailArrayListUse.size>0)
+            {
+               if (isSelectedSpinner)
+               {
+                 if (tempArrayList.size>0)
+                 {
+                    for (k in 0.. tempArrayList.size-1)
+                    {
+                        for (position in 0..tempArrayList.get(k).details.size-1)
+                        {
+
+                        }
+                    }
+                 }
+               }
+            }
 
 
         })
@@ -125,23 +261,19 @@ class CalendarFragment  : Fragment() {
             dayPosition=position
             isSelectedSpinner=true
             daySpinner.setText(dayValues.get(position).toString())
-            if (!daySpinner.text.toString().equals("DAY") && !monthSpinner.text.toString().equals("MONTH") && !yearSpinner.text.toString().equals(
-                    "YEAR"
-                ))
+            if (!daySpinner.text.toString().equals("DAY") && !monthSpinner.text.toString().equals("MONTH") && !yearSpinner.text.toString().equals("YEAR"))
             {
+                Log.e("CAL DAY","Con:1")
                 tempArrayList= ArrayList()
                 if (calendarDetailArrayListUse.size>0)
                 {
                     for (i in 0.. calendarDetailArrayListUse.size-1)
                     {
-                        if (calendarDetailArrayListUse.get(i).dayDate.equals(daySpinner.text.toString()) || calendarDetailArrayListUse.get(
-                                i
-                            ).dayDate.equals("0" + daySpinner.text.toString()) && calendarDetailArrayListUse.get(
-                                i
+                        if (calendarDetailArrayListUse.get(i).dayDate.equals(daySpinner.text.toString()) || calendarDetailArrayListUse.get(i).dayDate.equals("0" + daySpinner.text.toString()) && calendarDetailArrayListUse.get(i
                             ).yearDate.equals(yearSpinner.text.toString()) && calendarDetailArrayListUse.get(
                                 i
                             ).monthDate.toLowerCase().contains(
-                                daySpinner.text.toString().toLowerCase()
+                                monthSpinner.text.toString().toLowerCase()
                             ))
                         {
                             tempArrayList.add(calendarDetailArrayListUse.get(i))
@@ -149,19 +281,23 @@ class CalendarFragment  : Fragment() {
                     }
                     if (tempArrayList.size>0)
                     {
+                        mListView.visibility=View.VISIBLE
                         val calendarAdapter = CalendarListAdapter(mContext, tempArrayList)
                         calendarAdapter.notifyDataSetChanged()
                         mListView.adapter = calendarAdapter
+                    }
+                    else
+                    {
+                        mListView.visibility=View.INVISIBLE
                     }
 
 
                 }
 
             }
-            else if(!monthSpinner.text.toString().equals("MONTH") && !yearSpinner.text.toString().equals(
-                    "YEAR"
-                ))
+            else if(!monthSpinner.text.toString().equals("MONTH") && !yearSpinner.text.toString().equals("YEAR"))
             {
+                Log.e("CAL DAY","Con:2")
                 tempArrayList= ArrayList()
                 if (calendarDetailArrayListUse.size>0)
                 {
@@ -170,7 +306,7 @@ class CalendarFragment  : Fragment() {
                         if ( calendarDetailArrayListUse.get(i).yearDate.equals(yearSpinner.text.toString()) && calendarDetailArrayListUse.get(
                                 i
                             ).monthDate.toLowerCase().contains(
-                                daySpinner.text.toString().toLowerCase()
+                                monthSpinner.text.toString().toLowerCase()
                             ))
                         {
                             tempArrayList.add(calendarDetailArrayListUse.get(i))
@@ -178,18 +314,21 @@ class CalendarFragment  : Fragment() {
                     }
                     if (tempArrayList.size>0)
                     {
+                        mListView.visibility=View.VISIBLE
                         val calendarAdapter = CalendarListAdapter(mContext, tempArrayList)
                         calendarAdapter.notifyDataSetChanged()
                         mListView.adapter = calendarAdapter
+                    }
+                    else{
+                        mListView.visibility=View.INVISIBLE
                     }
 
 
                 }
             }
-            else  if (!daySpinner.text.toString().equals("DAY") && !monthSpinner.text.toString().equals(
-                    "MONTH"
-                ))
+            else  if (!daySpinner.text.toString().equals("DAY") && !monthSpinner.text.toString().equals("MONTH"))
             {
+                Log.e("CAL DAY","Con:3")
                 tempArrayList= ArrayList()
                 if (calendarDetailArrayListUse.size>0)
                 {
@@ -200,7 +339,7 @@ class CalendarFragment  : Fragment() {
                             ).dayDate.equals("0" + daySpinner.text.toString()) && calendarDetailArrayListUse.get(
                                 i
                             ).monthDate.toLowerCase().contains(
-                                daySpinner.text.toString().toLowerCase()
+                                monthSpinner.text.toString().toLowerCase()
                             ))
                         {
                             tempArrayList.add(calendarDetailArrayListUse.get(i))
@@ -208,9 +347,14 @@ class CalendarFragment  : Fragment() {
                     }
                     if (tempArrayList.size>0)
                     {
+                        mListView.visibility=View.VISIBLE
                         val calendarAdapter = CalendarListAdapter(mContext, tempArrayList)
                         calendarAdapter.notifyDataSetChanged()
                         mListView.adapter = calendarAdapter
+                    }
+                    else
+                    {
+                        mListView.visibility=View.INVISIBLE
                     }
 
 
@@ -219,13 +363,14 @@ class CalendarFragment  : Fragment() {
             }
             else  if ( !monthSpinner.text.toString().equals("MONTH"))
             {
+                Log.e("CAL DAY","Con:4")
                 tempArrayList= ArrayList()
                 if (calendarDetailArrayListUse.size>0)
                 {
                     for (i in 0.. calendarDetailArrayListUse.size-1)
                     {
                         if (calendarDetailArrayListUse.get(i).monthDate.toLowerCase().contains(
-                                daySpinner.text.toString().toLowerCase()
+                                monthSpinner.text.toString().toLowerCase()
                             ))
                         {
                             tempArrayList.add(calendarDetailArrayListUse.get(i))
@@ -233,9 +378,13 @@ class CalendarFragment  : Fragment() {
                     }
                     if (tempArrayList.size>0)
                     {
+                        mListView.visibility=View.VISIBLE
                         val calendarAdapter = CalendarListAdapter(mContext, tempArrayList)
                         calendarAdapter.notifyDataSetChanged()
                         mListView.adapter = calendarAdapter
+                    }
+                    else{
+                        mListView.visibility=View.INVISIBLE
                     }
 
 
@@ -244,23 +393,30 @@ class CalendarFragment  : Fragment() {
             }
             else  if (!daySpinner.text.toString().equals("DAY"))
             {
+                Log.e("CAL DAY","Con:5")
                 tempArrayList= ArrayList()
                 if (calendarDetailArrayListUse.size>0)
                 {
+                    Log.e("CAL DAY","Con:51")
                     for (i in 0.. calendarDetailArrayListUse.size-1)
                     {
-                        if (calendarDetailArrayListUse.get(i).dayDate.equals(daySpinner.text.toString()) || calendarDetailArrayListUse.get(
-                                i
-                            ).dayDate.equals("0" + daySpinner.text.toString()))
+                        if (calendarDetailArrayListUse.get(i).dayDate.equals(daySpinner.text.toString()) || calendarDetailArrayListUse.get(i).dayDate.equals("0" + daySpinner.text.toString()))
                         {
+                            Log.e("CAL DAY","Con:52")
                             tempArrayList.add(calendarDetailArrayListUse.get(i))
                         }
                     }
                     if (tempArrayList.size>0)
                     {
+                        mListView.visibility=View.VISIBLE
+                        Log.e("CAL DAY","Con:53")
                         val calendarAdapter = CalendarListAdapter(mContext, tempArrayList)
                         calendarAdapter.notifyDataSetChanged()
                         mListView.adapter = calendarAdapter
+                    }
+                    else
+                    {
+                        mListView.visibility=View.INVISIBLE
                     }
 
 
@@ -269,6 +425,7 @@ class CalendarFragment  : Fragment() {
             }
             else  if ( !yearSpinner.text.toString().equals("YEAR"))
             {
+                Log.e("CAL DAY","Con:6")
                 tempArrayList= ArrayList()
                 if (calendarDetailArrayListUse.size>0)
                 {
@@ -281,9 +438,14 @@ class CalendarFragment  : Fragment() {
                     }
                     if (tempArrayList.size>0)
                     {
+                        mListView.visibility=View.VISIBLE
                         val calendarAdapter = CalendarListAdapter(mContext, tempArrayList)
                         calendarAdapter.notifyDataSetChanged()
                         mListView.adapter = calendarAdapter
+                    }
+                    else
+                    {
+                        mListView.visibility=View.INVISIBLE
                     }
 
 
@@ -449,10 +611,9 @@ class CalendarFragment  : Fragment() {
             daySpinner.setText("DAY")
         }
 
-        if (!daySpinner.text.toString().equals("DAY") && !monthSpinner.text.toString().equals("MONTH") && !yearSpinner.text.toString().equals(
-                "YEAR"
-            ))
+        if (!daySpinner.text.toString().equals("DAY") && !monthSpinner.text.toString().equals("MONTH") && !yearSpinner.text.toString().equals("YEAR"))
         {
+            Log.e("CAL MON","CON 1")
             tempArrayList= ArrayList()
             if (calendarDetailArrayListUse.size>0)
             {
@@ -465,7 +626,7 @@ class CalendarFragment  : Fragment() {
                         ).yearDate.equals(yearSpinner.text.toString()) && calendarDetailArrayListUse.get(
                             i
                         ).monthDate.toLowerCase().contains(
-                            daySpinner.text.toString().toLowerCase()
+                            monthSpinner.text.toString().toLowerCase()
                         ))
                     {
                         tempArrayList.add(calendarDetailArrayListUse.get(i))
@@ -473,19 +634,22 @@ class CalendarFragment  : Fragment() {
                 }
                 if (tempArrayList.size>0)
                 {
+                    mListView.visibility=View.VISIBLE
                     val calendarAdapter = CalendarListAdapter(mContext, tempArrayList)
                     calendarAdapter.notifyDataSetChanged()
                     mListView.adapter = calendarAdapter
+                }
+                else{
+                    mListView.visibility=View.INVISIBLE
                 }
 
 
             }
 
         }
-        else if(!monthSpinner.text.toString().equals("MONTH") && !yearSpinner.text.toString().equals(
-                "YEAR"
-            ))
+        else if(!monthSpinner.text.toString().equals("MONTH") && !yearSpinner.text.toString().equals("YEAR"))
         {
+            Log.e("CAL MON","CON 2")
             tempArrayList= ArrayList()
             if (calendarDetailArrayListUse.size>0)
             {
@@ -494,7 +658,7 @@ class CalendarFragment  : Fragment() {
                     if ( calendarDetailArrayListUse.get(i).yearDate.equals(yearSpinner.text.toString()) && calendarDetailArrayListUse.get(
                             i
                         ).monthDate.toLowerCase().contains(
-                            daySpinner.text.toString().toLowerCase()
+                            monthSpinner.text.toString().toLowerCase()
                         ))
                     {
                         tempArrayList.add(calendarDetailArrayListUse.get(i))
@@ -502,18 +666,21 @@ class CalendarFragment  : Fragment() {
                 }
                 if (tempArrayList.size>0)
                 {
+                    mListView.visibility=View.VISIBLE
                     val calendarAdapter = CalendarListAdapter(mContext, tempArrayList)
                     calendarAdapter.notifyDataSetChanged()
                     mListView.adapter = calendarAdapter
+                }
+                else{
+                    mListView.visibility=View.INVISIBLE
                 }
 
 
             }
         }
-        else  if (!daySpinner.text.toString().equals("DAY") && !monthSpinner.text.toString().equals(
-                "MONTH"
-            ))
+        else  if (!daySpinner.text.toString().equals("DAY") && !monthSpinner.text.toString().equals("MONTH"))
         {
+            Log.e("CAL MON","CON 3")
             tempArrayList= ArrayList()
             if (calendarDetailArrayListUse.size>0)
             {
@@ -524,7 +691,7 @@ class CalendarFragment  : Fragment() {
                         ).dayDate.equals("0" + daySpinner.text.toString()) && calendarDetailArrayListUse.get(
                             i
                         ).monthDate.toLowerCase().contains(
-                            daySpinner.text.toString().toLowerCase()
+                            monthSpinner.text.toString().toLowerCase()
                         ))
                     {
                         tempArrayList.add(calendarDetailArrayListUse.get(i))
@@ -532,9 +699,13 @@ class CalendarFragment  : Fragment() {
                 }
                 if (tempArrayList.size>0)
                 {
+                    mListView.visibility=View.VISIBLE
                     val calendarAdapter = CalendarListAdapter(mContext, tempArrayList)
                     calendarAdapter.notifyDataSetChanged()
                     mListView.adapter = calendarAdapter
+                }
+                else{
+                    mListView.visibility=View.INVISIBLE
                 }
 
 
@@ -543,13 +714,16 @@ class CalendarFragment  : Fragment() {
         }
         else  if ( !monthSpinner.text.toString().equals("MONTH"))
         {
+            Log.e("CAL MON","CON 4")
             tempArrayList= ArrayList()
             if (calendarDetailArrayListUse.size>0)
             {
+                Log.e("CAL MON","CON 41")
                 for (i in 0.. calendarDetailArrayListUse.size-1)
                 {
+                    Log.e("CAL MON","CON 4"+calendarDetailArrayListUse.get(i).monthDate.toLowerCase()+"   "+daySpinner.text.toString().toLowerCase())
                     if (calendarDetailArrayListUse.get(i).monthDate.toLowerCase().contains(
-                            daySpinner.text.toString().toLowerCase()
+                            monthSpinner.text.toString().toLowerCase()
                         ))
                     {
                         tempArrayList.add(calendarDetailArrayListUse.get(i))
@@ -557,17 +731,22 @@ class CalendarFragment  : Fragment() {
                 }
                 if (tempArrayList.size>0)
                 {
+                    mListView.visibility=View.VISIBLE
                     val calendarAdapter = CalendarListAdapter(mContext, tempArrayList)
                     calendarAdapter.notifyDataSetChanged()
                     mListView.adapter = calendarAdapter
                 }
-
+                else
+                {
+                    mListView.visibility=View.INVISIBLE
+                }
 
             }
 
         }
         else  if (!daySpinner.text.toString().equals("DAY"))
         {
+            Log.e("CAL MON","CON 5")
             tempArrayList= ArrayList()
             if (calendarDetailArrayListUse.size>0)
             {
@@ -582,9 +761,13 @@ class CalendarFragment  : Fragment() {
                 }
                 if (tempArrayList.size>0)
                 {
+                    mListView.visibility=View.VISIBLE
                     val calendarAdapter = CalendarListAdapter(mContext, tempArrayList)
                     calendarAdapter.notifyDataSetChanged()
                     mListView.adapter = calendarAdapter
+                }
+                else{
+                    mListView.visibility=View.INVISIBLE
                 }
 
 
@@ -593,6 +776,7 @@ class CalendarFragment  : Fragment() {
         }
         else  if ( !yearSpinner.text.toString().equals("YEAR"))
         {
+            Log.e("CAL MON","CON 6")
             tempArrayList= ArrayList()
             if (calendarDetailArrayListUse.size>0)
             {
@@ -605,9 +789,14 @@ class CalendarFragment  : Fragment() {
                 }
                 if (tempArrayList.size>0)
                 {
+                    mListView.visibility=View.VISIBLE
                     val calendarAdapter = CalendarListAdapter(mContext, tempArrayList)
                     calendarAdapter.notifyDataSetChanged()
                     mListView.adapter = calendarAdapter
+                }
+                else
+                {
+                    mListView.visibility=View.INVISIBLE
                 }
 
             }
@@ -677,12 +866,7 @@ class CalendarFragment  : Fragment() {
             monthValues.add(month_name)
         }
 
-       var monthdataAdapter = CustomSpinnerAdapter(
-           mContext,
-           R.layout.spinner_textview_item,
-           monthValues,
-           -1
-       )
+       var monthdataAdapter = CustomSpinnerAdapter(mContext,R.layout.spinner_textview_item, monthValues, -1)
         monthListView.adapter = monthdataAdapter
     }
     private fun populateYearSpinner()
@@ -699,12 +883,7 @@ class CalendarFragment  : Fragment() {
         yearValues.add(yearInt3.toString() + "")
         yearValues.add(yearInt4.toString() + "")
         yearValues.add(yearInt5.toString() + "")
-        var yearDataAdapter = CustomSpinnerAdapter(
-            mContext,
-            R.layout.spinner_textview_item,
-            monthValues,
-            -1
-        )
+        var yearDataAdapter = CustomSpinnerAdapter(mContext, R.layout.spinner_textview_item, yearValues, -1)
         yearListView.adapter = yearDataAdapter
     }
     private fun populateDaySpinner()
@@ -725,33 +904,25 @@ class CalendarFragment  : Fragment() {
             else -> {
             }
         }
-        var dayAdapter = CustomSpinnerAdapter(
-            mContext,
-            R.layout.spinner_textview_item,
-            monthValues,
-            -1
-        )
+        var dayAdapter = CustomSpinnerAdapter(mContext, R.layout.spinner_textview_item, dayValues, -1)
         dayListView.adapter = dayAdapter
 
     }
     private fun callCalendarDetail() {
         calendarDetailArrayList=ArrayList()
         calendarDetailArrayListUse=ArrayList()
-        val call: Call<CalendarResponseModel> = ApiClient.getClient.calendar(
-            "Bearer " + PreferenceManager.getUserCode(
-                mContext
-            )
-        )
+        progressDialog.visibility=View.VISIBLE
+        val call: Call<CalendarResponseModel> = ApiClient.getClient.calendar("Bearer " + PreferenceManager.getUserCode(mContext))
         call.enqueue(object : Callback<CalendarResponseModel> {
             override fun onFailure(call: Call<CalendarResponseModel>, t: Throwable) {
-
+                progressDialog.visibility=View.GONE
             }
 
             override fun onResponse(
                 call: Call<CalendarResponseModel>,
                 response: Response<CalendarResponseModel>
             ) {
-
+                progressDialog.visibility=View.GONE
                 if (response.body()!!.status == 100) {
 
                     calendarDetailArrayList.addAll(response.body()!!.data.calendarArray)
@@ -846,6 +1017,7 @@ class CalendarFragment  : Fragment() {
                             calendarDetailArrayListUse
                         )
                         mListView.adapter = calendarAdapter
+                        isClicked=false
                     }
                 } else {
                     if (response.body()!!.status == 101) {

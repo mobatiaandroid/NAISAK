@@ -44,7 +44,7 @@
                     android:layout_toRightOf="@+id/userImage"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
-                    android:hint="username"
+                    android:hint="USER EMAIL"
                     android:inputType="textEmailAddress"
                     android:singleLine="true" />
             </RelativeLayout>
