@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="teal">#4dc4cf</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="rel_one">#4dc4cf</color>
+    <color name="rel_two">#003156</color>
+    <color name="rel_three">#EBE9E4</color>
+    <color name="rel_four">#9ddae6</color>
+    <color name="rel_five">#75298d</color>
+    <color name="rel_six">#f6874a</color>
+    <color name="rel_seven">#ffc20a</color>
+    <color name="rel_eight">#8f8c85</color>
+    <color name="rel_nine">#ee2953</color>
+    <color name="grey">#BDBDBD</color>
+    <color name="split_bg">#4dc4cf</color>
+    <color name="cal_row_4">#1B3354</color>
+    <color name="dark_blue">#1E7DDB</color>
+    <color name="Grey_300">#E0E0E0</color>
+    <color name="term_button_bg">#71C7D8</color>
+    <color name="list_bg">#002D4C</color>
+    <color name="background">#EFEFF4</color>
+    <color name="cal_row_1">#e67d4c</color>
+    <color name="cal_row_2">#6e2e86</color>
+    <color name="cal_row_3">#E21459</color>
+
+</resources>

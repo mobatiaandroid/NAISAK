@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+    <RelativeLayout
+        android:id="@+id/relativeHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
+        <ImageView
+            android:id="@+id/relative_logo_header"
+            android:layout_width="match_parent"
+            android:src="@drawable/titlebar"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/logoClickImgView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignTop="@+id/relative_logo_header"
+            android:background="@drawable/logotransperent"
+            android:layout_above="@+id/heading" />
+
+        <RelativeLayout
+            android:id="@+id/bottomRel"
+            android:layout_width="match_parent"
+            android:layout_above="@+id/heading"
+            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content" >
+
+
+            <RelativeLayout
+                android:id="@+id/backRelative"
+                android:layout_width="45dp"
+                android:layout_height="45dp">
+                <ImageView
+                    android:id="@+id/btn_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/back"
+                    android:visibility="visible" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/btn_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:visibility="invisible"/>
+        </RelativeLayout>
+
+        <com.nas.naisak.customviews.textview.CustomFontDJ5TextWhite
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:background="@color/split_bg"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            android:layout_below="@id/relative_logo_header"
+            android:gravity="center"
+            android:text="NewsLetter"
+            android:layout_height="40dp" />
+        <ImageView
+            android:id="@+id/btn_info"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="2dp"
+            android:layout_centerVertical="true"
+            android:layout_alignBottom="@+id/heading"
+            android:background="@drawable/infoptaicon"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/studentRel"
+        android:layout_below="@+id/relativeHeader"
+        android:orientation="vertical">
+        <com.nas.naisak.customviews.textview.CustomFontTextViewRegularBlack
+            android:id="@+id/select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left|center"
+            android:text="Select your child:"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="16sp" />
+        <LinearLayout
+            android:id="@+id/studentSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/select"
+            android:background="@drawable/event_spinnerbg"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <com.github.siyamed.shapeimageview.CircularImageView
+                android:id="@+id/imagicon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:padding="5dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/boy"
+                app:siBorderColor="#A0DAE5"
+                app:siBorderWidth="1dp" />
+
+            <com.nas.naisak.customviews.textview.CustomFontTextViewRegularBlack
+                android:id="@+id/studentName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="80"
+                android:gravity="left|center"
+                android:paddingLeft="10dp"
+                android:text="Select a child"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="8" />
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right|center"
+                android:layout_weight="12"
+                android:src="@drawable/arrowdownnew"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mAbsenceListView"
+        style="@style/ListStyleBlackTextTransparentSelector"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/studentRel"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp" />
+
+
+</RelativeLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:weightSum="50"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        >
+        <ImageView
+            android:id="@+id/statusImg"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="2dp"
+            android:visibility="gone"
+            android:src="@drawable/shape_circle_red"/>
+        <com.nas.naisak.customviews.textview.CustomFontTextViewRegularNoColor
+            android:id="@+id/eventName"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15"
+            android:maxLines="2"
+            android:layout_marginLeft="5dp"
+            android:gravity="left|center_vertical"
+            android:textColor="@color/cal_row_1"
+            android:text="Mindful Parenting Workshop"
+            android:textSize="15sp"
+            />
+        <com.nas.naisak.customviews.textview.CustomFontTextViewRegularNoColor
+            android:id="@+id/eventTime"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
+            android:gravity="center"
+            android:textColor="@color/cal_row_1"
+            android:text="Mindful Parenting Workshop"
+            android:textSize="15sp"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_weight="5">
+            <ImageView
+                android:id="@+id/addicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:src="@drawable/addicon1"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_weight="5">
+            <ImageView
+                android:id="@+id/removeicon"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/minimize1"
+
+                />
+        </LinearLayout>
+        <!--<ImageView
+            android:id="@+id/removeicon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/minimize1"
+
+            />-->
+    </LinearLayout>
+
+</LinearLayout>

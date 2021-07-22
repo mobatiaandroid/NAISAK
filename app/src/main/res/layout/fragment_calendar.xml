@@ -1,0 +1,357 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+    <RelativeLayout
+        android:id="@+id/titleRel"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.nas.naisak.customviews.textview.CustomFontDJ5TextWhite
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/split_bg"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="Title"
+            android:textColor="@color/white"
+            android:textSize="17dp" />
+        <ImageView
+            android:id="@+id/infoImg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="5dp"
+            android:visibility="visible"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/infoptaicon"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/commonRel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleRel"
+        android:gravity="center_vertical">
+
+
+        <RelativeLayout
+            android:id="@+id/dateRel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:id="@+id/relDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/split_bg">
+
+                <LinearLayout
+                    android:id="@+id/linearDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:weightSum="90">
+
+                    <TextView
+                        android:id="@+id/daySpinner"
+                        style="@style/SpinnerStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="37dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="30"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:text="DAY"
+                        android:background="@drawable/drop"
+                        />
+
+                    <TextView
+                        android:id="@+id/monthSpinner"
+                        style="@style/SpinnerStyle"
+                        android:layout_width="0dp"
+
+                        android:layout_height="37dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="30"
+                        android:text="MONTH"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/drop"
+                        />
+
+                    <TextView
+                        android:id="@+id/yearSpinner"
+                        style="@style/SpinnerStyle"
+                        android:layout_width="0dp"
+                        android:layout_height="37dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="30"
+                        android:text="YEAR"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:background="@drawable/drop"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/linearDate"
+                    android:weightSum="90">
+                    <ImageView
+                        android:id="@+id/clearData"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/reset"
+                        android:layout_weight="30"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@color/term_button_bg"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/dateText"
+                    style="@style/calendar_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="60dp"
+                    android:textSize="50sp"
+                    android:visibility="invisible" />
+
+                <RelativeLayout
+                    android:id="@+id/relMntYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/dateText"
+                    android:layout_margin="5dp"
+                    android:visibility="invisible">
+
+                    <TextView
+                        android:id="@+id/mnthTxt"
+                        style="@style/textstyleWhiteNopadding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/spaceTxt"
+                        style="@style/textstyleWhiteNopadding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/mnthTxt"
+                        android:text=", "
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/yearTxt"
+                        style="@style/textstyleWhiteNopadding"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/spaceTxt"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/moreImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/relMntYear"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toLeftOf="@+id/addAllBtn"
+                    android:background="@color/term_button_bg"
+                    android:gravity="center"
+                    android:padding="7dp"
+                    android:text="Term Calendar"
+                    android:textColor="@color/white"
+                    android:textSize="15dp" />
+
+                <ImageView
+                    android:id="@+id/addAllBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/relMntYear"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_toLeftOf="@+id/delAllBtn"
+                    android:background="@drawable/addall" />
+
+                <ImageView
+                    android:id="@+id/delAllBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/relMntYear"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/removeall" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/dividerView"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/relDate"
+                android:background="@drawable/list_divider" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/calList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:layout_below="@+id/commonRel"
+        android:layout_above="@+id/infobanner"
+        android:overScrollMode="never"
+        android:scrollbars="vertical"
+        android:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/infobanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/infobanner_calendar"
+        android:layout_alignParentBottom="true"
+        android:background="@color/background"/>
+    <RelativeLayout
+        android:id="@+id/commonRelList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleRel"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+
+        <RelativeLayout
+            android:id="@+id/dateRelList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:visibility="visible">
+
+            <RelativeLayout
+                android:id="@+id/relDateList"
+                android:layout_width="match_parent"
+                android:layout_height="360dp"
+                android:background="@color/transparent">
+
+                <LinearLayout
+                    android:id="@+id/linearDateList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/transparent"
+                    android:weightSum="90">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="30"
+                        android:minWidth="200dp">
+
+                        <RelativeLayout
+                            android:id="@+id/daySpinnerList"
+                            android:layout_width="match_parent"
+                            android:layout_height="37dp"
+                            android:minWidth="200dp" />
+
+                        <ListView
+                            android:id="@+id/dayListView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:dividerHeight="1dp"
+                            android:padding="1dp"
+                            android:divider="@color/white"
+                            android:drawSelectorOnTop="true"
+                            android:background="@color/white"
+                            android:layout_below="@+id/daySpinnerList"
+                            >
+
+                        </ListView>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="30"
+                        android:minWidth="200dp">
+
+                        <RelativeLayout
+                            android:id="@+id/monthSpinnerList"
+                            android:layout_width="match_parent"
+                            android:layout_height="37dp"
+                            android:minWidth="200dp" />
+
+                        <ListView
+                            android:id="@+id/monthListView"
+                            android:visibility="gone"
+                            android:background="@color/white"
+                            android:dividerHeight="1dp"
+                            android:padding="1dp"
+                            android:divider="@color/white"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/monthSpinnerList"
+                            >
+
+                        </ListView>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_weight="30"
+                        android:minWidth="200dp">
+
+                        <RelativeLayout
+                            android:id="@+id/yearSpinnerList"
+                            android:layout_width="match_parent"
+                            android:layout_height="37dp"
+                            android:minWidth="200dp" />
+
+                        <ListView
+                            android:id="@+id/yearListView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:padding="1dp"
+                            android:background="@color/white"
+                            android:dividerHeight="1dp"
+                            android:divider="@color/white"
+                            android:layout_below="@+id/yearSpinnerList"
+                            >
+
+                        </ListView>
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

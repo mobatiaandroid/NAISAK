@@ -1,0 +1,90 @@
+<resources>
+    <string name="app_name">NAISAK</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="null_value"></string>
+    <string name="introduction">Introduction:</string>
+
+    <string-array name="navigation_item_reg">
+        <!-- 0 -->
+        <item>Home</item>
+        <!-- 1 -->
+        <item>Calendar</item>
+        <!-- 2 -->
+        <item>Notifications</item>
+        <!-- 3 -->
+        <item>Communications</item>
+        <!-- 4 -->
+        <item>Payments</item>
+        <!-- 5 -->
+        <item>Parent Essentials</item>
+        <!-- 6 -->
+        <item>About Us</item>
+        <!-- 7 -->
+        <item>Contact Us</item>
+        <item>Settings</item>
+    </string-array>
+    <string-array name="navigation_item_guest">
+        <!-- 0 -->
+        <item>Home</item>
+        <!-- 1 -->
+        <item>Calendar</item>
+        <!-- 2 -->
+        <item>Notifications</item>
+        <!-- 3 -->
+        <item>Communications</item>
+        <!-- 4 -->
+        <item>Payments</item>
+        <!-- 5 -->
+        <item>Parent Essentials</item>
+        <!-- 6 -->
+        <item>About Us</item>
+        <!-- 7 -->
+        <item>Contact Us</item>
+        <item>Settings</item>
+    </string-array>
+
+    <string-array name="navigation_item_reg_icons">
+        <!-- 0 -->
+        <item>@drawable/home</item>
+        <!-- 1 -->
+        <item>@drawable/calendar</item>
+        <!-- 2 -->
+        <item>@drawable/notif</item>
+        <!-- 3 -->
+        <item>@drawable/communication</item>
+        <!-- 4 -->
+        <item>@drawable/payment</item>
+        <!-- 4 -->
+        <item>@drawable/parent</item>
+        <!-- 5 -->
+        <item>@drawable/aboutus</item>
+        <!-- 6 -->
+        <item>@drawable/contacts</item>
+        <item>@drawable/settings_side</item>
+    </string-array>
+    <string-array name="navigation_item_guest_icons">
+        <!-- 0 -->
+        <item>@drawable/home</item>
+        <!-- 1 -->
+        <item>@drawable/calendar</item>
+        <!-- 2 -->
+        <item>@drawable/notif</item>
+        <!-- 3 -->
+        <item>@drawable/communication</item>
+        <!-- 4 -->
+        <item>@drawable/payment</item>
+        <!-- 4 -->
+        <item>@drawable/parent</item>
+        <!-- 5 -->
+        <item>@drawable/aboutus</item>
+        <!-- 6 -->
+        <item>@drawable/contacts</item>
+        <item>@drawable/settings_side</item>
+    </string-array>
+    <array name="calendar_row_colors">
+        <item>@color/cal_row_1</item>
+        <item>@color/cal_row_2</item>
+        <item>@color/cal_row_3</item>
+        <item>@color/cal_row_4</item>
+    </array>
+</resources>

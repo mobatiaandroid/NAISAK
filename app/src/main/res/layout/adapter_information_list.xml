@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/statusImg"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/shape_circle_red"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/relSub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/statusImg"
+        android:padding="5dp">
+
+        <com.nas.naisak.customviews.textview.CustomFontTextViewRegularBlack
+            android:id="@+id/listTxtTitle"
+            style="@style/textstyleblack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/arrowImg"
+            android:singleLine="true" />
+
+
+        <ImageView
+            android:id="@+id/arrowImg"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/arrow" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/teal"
+        android:layout_below="@+id/relSub"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"/>
+
+</RelativeLayout>

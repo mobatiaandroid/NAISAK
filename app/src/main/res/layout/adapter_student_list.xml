@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/relSub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp" >
+
+        <!--
+                <ImageView
+                    android:id="@+id/imagicon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/roundfb"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentLeft="true"
+                    />
+        -->
+        <com.github.siyamed.shapeimageview.CircularImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/boy"
+            app:siBorderWidth="1dp"
+            android:id="@+id/imagicon"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentLeft="true"
+            app:siBorderColor="#A0DAE5"/>
+        <com.nas.naisak.customviews.textview.CustomFontTextViewRegularBlack
+            android:id="@+id/listTxtTitle"
+            style="@style/textstyleblack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:text="NAS DUBAI"
+            android:layout_toLeftOf="@+id/arrowImg"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/imagicon"
+            android:singleLine="true" />
+
+
+        <com.nas.naisak.customviews.textview.CustomFontTextViewRegularNoColor
+            android:id="@+id/listTxtClass"
+            style="@style/textstyleblack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/listTxtTitle"
+            android:layout_toLeftOf="@+id/arrowImg"
+            android:text="NAS DUBAI"
+            android:textColor="@color/grey"
+            android:gravity="center_vertical"
+            android:layout_toRightOf="@+id/imagicon"
+            android:singleLine="true" />
+
+        <ImageView
+            android:id="@+id/arrowImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/arrow" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/list_divider_teal"
+        android:layout_below="@+id/relSub"/>
+</RelativeLayout>

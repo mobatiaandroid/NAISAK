@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white">
+    <RelativeLayout
+        android:id="@+id/relativeHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true" >
+        <ImageView
+            android:id="@+id/relative_logo_header"
+            android:layout_width="match_parent"
+            android:src="@drawable/titlebar"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/logoClickImgView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignTop="@+id/relative_logo_header"
+            android:background="@drawable/logotransperent"
+            android:layout_above="@+id/heading" />
+
+        <RelativeLayout
+            android:id="@+id/bottomRel"
+            android:layout_width="match_parent"
+            android:layout_above="@+id/heading"
+            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content" >
+
+
+            <RelativeLayout
+                android:id="@+id/backRelative"
+                android:layout_width="45dp"
+                android:layout_height="45dp">
+                <ImageView
+                    android:id="@+id/btn_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/back"
+                    android:visibility="visible" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/btn_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:visibility="invisible"/>
+        </RelativeLayout>
+
+        <com.nas.naisak.customviews.textview.CustomFontDJ5TextWhite
+            android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:background="@color/split_bg"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            android:layout_below="@id/relative_logo_header"
+            android:gravity="center"
+            android:text="NewsLetter"
+            android:layout_height="40dp" />
+        <ImageView
+            android:id="@+id/btn_info"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="2dp"
+            android:layout_centerVertical="true"
+            android:layout_alignBottom="@+id/heading"
+            android:background="@drawable/infoptaicon"
+            android:visibility="invisible"/>
+
+    </RelativeLayout>
+    <WebView
+        android:id="@+id/paymentWeb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:layout_below="@+id/relativeHeader"/>
+    <include
+        android:id="@+id/progressDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/custom_progress_layout"
+        android:visibility="gone"
+        android:layout_centerInParent="true" />
+    <LinearLayout
+        android:id="@+id/mainLinear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeHeader"
+        android:orientation="vertical"
+        android:weightSum="100"
+        android:visibility="visible">
+        <ImageView
+            android:id="@+id/bannerImageViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30"
+            android:background="@drawable/payment_default_banner"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="70">
+
+            <ScrollView
+                android:id="@+id/scroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <RelativeLayout
+                        android:id="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:visibility="visible">
+                        <LinearLayout
+                            android:id="@+id/date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_gravity="center_vertical"
+                            android:visibility="gone"
+                            android:background="@drawable/closing_new">
+
+                            <com.nas.naisak.customviews.textview.CustomFontTextViewRegularWhite
+                                android:id="@+id/closingTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="15dp"
+                                android:layout_marginRight="15dp"
+                                android:padding="5dp"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+                        <com.nas.naisak.customviews.textview.CustomFontTextViewSemiBoldBlack
+                            android:id="@+id/descriptionTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:singleLine="true"
+                            android:gravity="center"
+                            android:layout_below="@+id/date"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"
+                            android:layout_marginTop="15dp"
+                            android:visibility="visible" />
+                        <com.nas.naisak.customviews.textview.CustomFontTextViewRegularBlack
+                            android:id="@+id/description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/descriptionTitle"
+                            android:layout_marginTop="15dp"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:layout_marginRight="5dp"
+                            android:layout_marginLeft="10dp"
+                            android:visibility="visible" />
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:id="@+id/totalLinear"
+                        android:layout_below="@+id/title"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:layout_marginRight="5dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:weightSum="90"
+                        android:padding="5dp"
+                        android:background="@drawable/rectangular_border_payment"
+                        android:visibility="visible">
+                        <com.nas.naisak.customviews.textview.CustomFontTextViewBoldBlack
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total"
+                            android:textAllCaps="true"
+                            android:layout_weight="30"
+                            android:textSize="18dp"
+
+                            android:layout_gravity="center_vertical" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight="30"
+                            android:orientation="horizontal">
+
+                            <com.nas.naisak.customviews.textview.CustomFontTextViewBoldBlack
+                                android:id="@+id/totalAmount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
+                                android:textSize="20dp" />
+
+                            <com.nas.naisak.customviews.textview.CustomFontTextViewBoldBlack
+                                android:id="@+id/aedTxt"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginLeft="5dp"
+                                android:gravity="center"
+                                android:text="AED"
+                                android:textSize="18dp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/paidImg"
+                            android:layout_width="70dp"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:visibility="gone"
+                            android:src="@drawable/paid"
+                            android:layout_marginRight="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="30"/>
+                        <com.nas.naisak.customviews.button.CustomFontButtonRegularNoColor
+                            android:id="@+id/payTotalButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:gravity="center"
+                            android:textColor="@color/white"
+                            android:visibility="visible"
+                            android:background="@color/rel_two"
+                            android:text="PAY"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="30"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </ScrollView>
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/printLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="right"
+            android:weightSum="100">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="30">
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/emailLinear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="5dp"
+                android:layout_weight="20"
+                android:visibility="gone">
+                <ImageView
+                    android:id="@+id/mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/email_payment"/>
+                <com.nas.naisak.customviews.textview.CustomFontTextViewRegularBlack
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Email us"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/printLinearClick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="5dp"
+                android:layout_weight="15">
+                <ImageView
+                    android:id="@+id/download"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/print_payment"
+                    />
+                <com.nas.naisak.customviews.textview.CustomFontTextViewRegularBlack
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Print"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/shareLinear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="5dp"
+                android:layout_weight="15">
+                <ImageView
+                    android:id="@+id/print"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/share_payment"/>
+                <com.nas.naisak.customviews.textview.CustomFontTextViewRegularBlack
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Share"
+                    android:gravity="center"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/downloadLinear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="5dp"
+                android:layout_weight="20">
+                <ImageView
+                    android:id="@+id/share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/download_payment"/>
+                <com.nas.naisak.customviews.textview.CustomFontTextViewRegularBlack
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Download"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

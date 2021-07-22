@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <RelativeLayout
+        android:id="@+id/relSub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp" >
+
+        <com.nas.naisak.customviews.textview.CustomFontTextViewRegularBlack
+            android:id="@+id/listTxtTitle"
+            style="@style/textstyleblackNopadding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="10dp"
+            android:text="Category"
+            android:layout_centerInParent="true"
+            android:layout_toLeftOf="@+id/statusLayout"
+            android:singleLine="true" />
+
+
+        <include
+            android:id="@+id/statusLayout"
+            layout="@layout/layout_updated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/arrowImg"
+            android:visibility="gone" />
+        <ImageView
+
+            android:id="@+id/arrowImg"
+            android:layout_width="20dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow" />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/relSub"
+        android:background="@color/split_bg"/>
+</RelativeLayout>
+
+
