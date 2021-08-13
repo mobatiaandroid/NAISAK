@@ -7,6 +7,8 @@ import com.nas.naisak.activtiy.login.model.LoginResponse
 import com.nas.naisak.activtiy.notification.model.MessageDetailResponse
 import com.nas.naisak.activtiy.notification.model.NotificationDetailApiModel
 import com.nas.naisak.activtiy.payment.payhere.model.PaymentApiModel
+import com.nas.naisak.activtiy.payment.payhere.model.PaymentGatewayApiModel
+import com.nas.naisak.activtiy.payment.payhere.model.PaymentGatewayResponseModel
 import com.nas.naisak.commonmodels.CommonDetailResponse
 import com.nas.naisak.commonmodels.ModelWithPageNumberOnly
 import com.nas.naisak.commonmodels.StudentListModel
@@ -98,6 +100,14 @@ interface ApiInterface {
         @Body paymentid: PaymentDetailApiModel,
         @Header("Authorization") token:String
     ): Call<PaymentDetailResponseModel>
+
+    /*************PAYMENT GATEWAY****************/
+    @POST("api/v1/payment/getpaymentlink")
+    @Headers("Content-Type: application/json")
+    fun paymentGateway(
+        @Body paymentid: PaymentGatewayApiModel,
+        @Header("Authorization") token:String
+    ): Call<PaymentGatewayResponseModel>
 
     /************PAYMENT INFORMATION****************/
     @POST("api/v1/parent/payment_informations")

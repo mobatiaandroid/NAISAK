@@ -9,15 +9,19 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.nas.naisak.BuildConfig
 import com.nas.naisak.R
 import com.nas.naisak.activtiy.tutorial.TutorialActivity
 import com.nas.naisak.constants.ApiClient
@@ -37,6 +41,7 @@ import retrofit2.Response
 class SettingsFragment : Fragment() {
     lateinit var mContext: Context
     lateinit var titleTextView: TextView
+    lateinit var versionText: TextView
     lateinit var notificationRecycler: RecyclerView
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var mSettingsArrayListRegistered : ArrayList<String>
@@ -59,21 +64,24 @@ class SettingsFragment : Fragment() {
         mSettingsArrayListRegistered= ArrayList()
         mSettingsArrayListGuest=ArrayList()
         titleTextView = view?.findViewById(R.id.titleTextView) as TextView
+        versionText = view?.findViewById(R.id.versionText) as TextView
         notificationRecycler = view?.findViewById(R.id.notificationRecycler) as RecyclerView
         titleTextView.text="Settings"
+        var version:String=BuildConfig.VERSION_NAME
+        versionText.setText("UAT : "+version)
         linearLayoutManager = LinearLayoutManager(mContext)
         notificationRecycler.layoutManager = linearLayoutManager
         if(PreferenceManager.getUserCode(mContext).equals(""))
         {
             mSettingsArrayListGuest.add("Change App Settings")
             mSettingsArrayListGuest.add("Terms of Service")
-            mSettingsArrayListGuest.add("Email Help")
+            mSettingsArrayListGuest.add("Email Us")
             mSettingsArrayListGuest.add("Tutorial")
         }
         else{
             mSettingsArrayListRegistered.add("Change App Settings")
             mSettingsArrayListRegistered.add("Terms of Service")
-            mSettingsArrayListRegistered.add("Email Help")
+            mSettingsArrayListRegistered.add("Email Us")
             mSettingsArrayListRegistered.add("Tutorial")
             mSettingsArrayListRegistered.add("Change Password")
         }
@@ -183,6 +191,309 @@ class SettingsFragment : Fragment() {
         var progressDialog = dialog.findViewById(R.id.progressDialog) as ProgressBar
         var btn_cancel = dialog.findViewById(R.id.btn_cancel) as Button
         btn_cancel.isClickable=true
+
+
+        btn_changepassword?.alpha=0.5f
+        btn_changepassword?.isClickable=false
+        var isSigned:Boolean=false
+
+
+        text_currentpassword?.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {
+                if (s.toString().trim().equals(""))
+                {
+                    btn_changepassword?.alpha=0.5f
+                    btn_changepassword?.isClickable=false
+                    isSigned=false
+                }
+                else{
+                    if(text_currentnewpassword.text.toString().trim().equals(""))
+                    {
+                        btn_changepassword?.alpha=0.5f
+                        btn_changepassword?.isClickable=false
+                        isSigned=false
+                    }
+                    else{
+                        if(text_confirmpassword.text.toString().trim().equals(""))
+                        {
+                            btn_changepassword?.alpha=0.5f
+                            btn_changepassword?.isClickable=false
+                            isSigned=false
+                        }
+                        else{
+                            btn_changepassword?.alpha=1.0f
+                            btn_changepassword?.isClickable=true
+                            isSigned=true
+                        }
+                    }
+
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+                if (s.toString().trim().equals(""))
+                {
+                    btn_changepassword?.alpha=0.5f
+                    btn_changepassword?.isClickable=false
+                    isSigned=false
+                }
+                else{
+                    if(text_currentnewpassword.text.toString().trim().equals(""))
+                    {
+                        btn_changepassword?.alpha=0.5f
+                        btn_changepassword?.isClickable=false
+                        isSigned=false
+                    }
+                    else{
+                        if(text_confirmpassword.text.toString().trim().equals(""))
+                        {
+                            btn_changepassword?.alpha=0.5f
+                            btn_changepassword?.isClickable=false
+                            isSigned=false
+                        }
+                        else{
+                            btn_changepassword?.alpha=1.0f
+                            btn_changepassword?.isClickable=true
+                            isSigned=true
+                        }
+                    }
+
+                }
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                if (s.toString().trim().equals(""))
+                {
+                    btn_changepassword?.alpha=0.5f
+                    btn_changepassword?.isClickable=false
+                    isSigned=false
+                }
+                else{
+                    if(text_currentnewpassword.text.toString().trim().equals(""))
+                    {
+                        btn_changepassword?.alpha=0.5f
+                        btn_changepassword?.isClickable=false
+                        isSigned=false
+                    }
+                    else{
+                        if(text_confirmpassword.text.toString().trim().equals(""))
+                        {
+                            btn_changepassword?.alpha=0.5f
+                            btn_changepassword?.isClickable=false
+                            isSigned=false
+                        }
+                        else{
+                            btn_changepassword?.alpha=1.0f
+                            btn_changepassword?.isClickable=true
+                            isSigned=true
+                        }
+                    }
+
+                }
+            }
+        })
+
+         text_currentnewpassword?.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {
+                if (s.toString().trim().equals(""))
+                {
+                    btn_changepassword?.alpha=0.5f
+                    btn_changepassword?.isClickable=false
+                    isSigned=false
+                }
+                else{
+                    if(text_currentpassword.text.toString().trim().equals(""))
+                    {
+                        btn_changepassword?.alpha=0.5f
+                        btn_changepassword?.isClickable=false
+                        isSigned=false
+                    }
+                    else{
+                        if(text_confirmpassword.text.toString().trim().equals(""))
+                        {
+                            btn_changepassword?.alpha=0.5f
+                            btn_changepassword?.isClickable=false
+                            isSigned=false
+                        }
+                        else{
+                            btn_changepassword?.alpha=1.0f
+                            btn_changepassword?.isClickable=true
+                            isSigned=true
+                        }
+                    }
+
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+                if (s.toString().trim().equals(""))
+                {
+                    btn_changepassword?.alpha=0.5f
+                    btn_changepassword?.isClickable=false
+                    isSigned=false
+                }
+                else{
+                    if(text_currentpassword.text.toString().trim().equals(""))
+                    {
+                        btn_changepassword?.alpha=0.5f
+                        btn_changepassword?.isClickable=false
+                        isSigned=false
+                    }
+                    else{
+                        if(text_confirmpassword.text.toString().trim().equals(""))
+                        {
+                            btn_changepassword?.alpha=0.5f
+                            btn_changepassword?.isClickable=false
+                            isSigned=false
+                        }
+                        else{
+                            btn_changepassword?.alpha=1.0f
+                            btn_changepassword?.isClickable=true
+                            isSigned=true
+                        }
+                    }
+
+                }
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                if (s.toString().trim().equals(""))
+                {
+                    btn_changepassword?.alpha=0.5f
+                    btn_changepassword?.isClickable=false
+                    isSigned=false
+                }
+                else{
+                    if(text_currentpassword.text.toString().trim().equals(""))
+                    {
+                        btn_changepassword?.alpha=0.5f
+                        btn_changepassword?.isClickable=false
+                        isSigned=false
+                    }
+                    else{
+                        if(text_confirmpassword.text.toString().trim().equals(""))
+                        {
+                            btn_changepassword?.alpha=0.5f
+                            btn_changepassword?.isClickable=false
+                            isSigned=false
+                        }
+                        else{
+                            btn_changepassword?.alpha=1.0f
+                            btn_changepassword?.isClickable=true
+                            isSigned=true
+                        }
+                    }
+
+                }
+            }
+        })
+
+        text_confirmpassword?.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {
+                if (s.toString().trim().equals(""))
+                {
+                    btn_changepassword?.alpha=0.5f
+                    btn_changepassword?.isClickable=false
+                    isSigned=false
+                }
+                else{
+                    if(text_currentpassword.text.toString().trim().equals(""))
+                    {
+                        btn_changepassword?.alpha=0.5f
+                        btn_changepassword?.isClickable=false
+                        isSigned=false
+                    }
+                    else{
+                        if(text_currentnewpassword.text.toString().trim().equals(""))
+                        {
+                            btn_changepassword?.alpha=0.5f
+                            btn_changepassword?.isClickable=false
+                            isSigned=false
+                        }
+                        else{
+                            btn_changepassword?.alpha=1.0f
+                            btn_changepassword?.isClickable=true
+                            isSigned=true
+                        }
+                    }
+
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+                if (s.toString().trim().equals(""))
+                {
+                    btn_changepassword?.alpha=0.5f
+                    btn_changepassword?.isClickable=false
+                    isSigned=false
+                }
+                else{
+                    if(text_currentpassword.text.toString().trim().equals(""))
+                    {
+                        btn_changepassword?.alpha=0.5f
+                        btn_changepassword?.isClickable=false
+                        isSigned=false
+                    }
+                    else{
+                        if(text_currentnewpassword.text.toString().trim().equals(""))
+                        {
+                            btn_changepassword?.alpha=0.5f
+                            btn_changepassword?.isClickable=false
+                            isSigned=false
+                        }
+                        else{
+                            btn_changepassword?.alpha=1.0f
+                            btn_changepassword?.isClickable=true
+                            isSigned=true
+                        }
+                    }
+
+                }
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                if (s.toString().trim().equals(""))
+                {
+                    btn_changepassword?.alpha=0.5f
+                    btn_changepassword?.isClickable=false
+                    isSigned=false
+                }
+                else{
+                    if(text_currentpassword.text.toString().trim().equals(""))
+                    {
+                        btn_changepassword?.alpha=0.5f
+                        btn_changepassword?.isClickable=false
+                        isSigned=false
+                    }
+                    else{
+                        if(text_currentnewpassword.text.toString().trim().equals(""))
+                        {
+                            btn_changepassword?.alpha=0.5f
+                            btn_changepassword?.isClickable=false
+                            isSigned=false
+                        }
+                        else{
+                            btn_changepassword?.alpha=1.0f
+                            btn_changepassword?.isClickable=true
+                            isSigned=true
+                        }
+                    }
+
+                }
+            }
+        })
+
+
+
         btn_cancel.setOnClickListener()
         {
 

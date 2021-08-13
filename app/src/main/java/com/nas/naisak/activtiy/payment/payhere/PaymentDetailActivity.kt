@@ -20,6 +20,8 @@ import com.nas.naisak.R
 import com.nas.naisak.activity.payment.payhere.model.PaymentDetailApiModel
 import com.nas.naisak.activity.payment.payhere.model.PaymentDetailResponseModel
 import com.nas.naisak.activtiy.home.HomeActivity
+import com.nas.naisak.activtiy.payment.payhere.model.PaymentGatewayApiModel
+import com.nas.naisak.activtiy.payment.payhere.model.PaymentGatewayResponseModel
 import com.nas.naisak.constants.ApiClient
 import com.nas.naisak.constants.CommonMethods
 import com.nas.naisak.constants.PreferenceManager
@@ -66,8 +68,10 @@ class PaymentDetailActivity  : AppCompatActivity(){
     var payment_type_print: String = ""
     var invoice_description: String = ""
     var invoice_no: String = ""
-    var payment_type:Int=0
+    var payment_type:String=""
+    var payment_id:String=""
     var is_paid:Int=0
+    var PaymentID:Int=0
     lateinit var anim: RotateAnimation
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -116,6 +120,9 @@ class PaymentDetailActivity  : AppCompatActivity(){
             val intent = Intent(mContext, HomeActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
+        })
+        payTotalButton.setOnClickListener(View.OnClickListener {
+            callGatewayLink()
         })
 
         printLinear.setOnClickListener(View.OnClickListener {
@@ -226,7 +233,13 @@ class PaymentDetailActivity  : AppCompatActivity(){
         paymentWeb.settings.domStorageEnabled = true
         paymentWeb.settings.javaScriptCanOpenWindowsAutomatically = true
         paymentWeb.settings.setSupportMultipleWindows(true)
-        paymentWeb.webViewClient = PaymentDetailActivity.MyPrintWebViewClient()
+        paymentWeb.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+                view?.loadUrl(url)
+                return true
+            }
+        }
+//        paymentWeb.webViewClient = PaymentDetailActivity.MyPrintWebViewClient()
 //        paymentWeb.setWebChromeClient(new MyWebChromeClient());
     }
 
@@ -247,20 +260,21 @@ class PaymentDetailActivity  : AppCompatActivity(){
             ) {
                 if (response.body()!!.status == 100) {
                     payment_type = response.body()!!.data.payment_type
-                    if (payment_type == 1) {
+                    if (payment_type .equals("1")) {
                         payment_type_invoice = "Online"
-                    } else if (payment_type == 2) {
+                    } else if (payment_type .equals("2")) {
                         payment_type_invoice = "Cash"
-                    } else if (payment_type == 3) {
+                    } else if (payment_type  .equals("3")) {
                         payment_type_invoice = "Cheque"
-                    } else if (payment_type == 4) {
+                    } else if (payment_type .equals("4")) {
                         payment_type_invoice = "Bank Transfer"
-                    } else if (payment_type == 5) {
+                    } else if (payment_type  .equals("5")) {
                         payment_type_invoice = "Online"
                     } else {
                         payment_type_invoice = "Online"
                     }
 
+                    PaymentID = response.body()!!.data.id
                     is_paid = response.body()!!.data.is_paid
                     formated_amount = response.body()!!.data.formated_amount
                     current = response.body()!!.data.amount
@@ -272,6 +286,7 @@ class PaymentDetailActivity  : AppCompatActivity(){
                     payment_type_print = payment_type_invoice
                     trn_no = response.body()!!.data.trn_no
                     invoice_no = response.body()!!.data.invoice_no
+                    payment_id = response.body()!!.data.payment_id
                     if (is_paid == 0) {
                         payTotalButton.visibility = View.VISIBLE
                         totalLinear.visibility = View.VISIBLE
@@ -299,21 +314,54 @@ class PaymentDetailActivity  : AppCompatActivity(){
 
         })
     }
+    fun callGatewayLink()
+    {
+        val token = PreferenceManager.getUserCode(mContext)
+        val paymentID = PaymentGatewayApiModel(PaymentID.toString(),current,invoice_no,PreferenceManager.getUserEmail(mContext)!!,"3","2","Android","1.0")
+        val call: Call<PaymentGatewayResponseModel> =
+            ApiClient.getClient.paymentGateway(paymentID, "Bearer " + token)
+        call.enqueue(object : Callback<PaymentGatewayResponseModel> {
+            override fun onFailure(call: Call<PaymentGatewayResponseModel>, t: Throwable) {
+                Log.e("Error", t.localizedMessage)
+            }
 
+            override fun onResponse(
+                call: Call<PaymentGatewayResponseModel>,
+                response: Response<PaymentGatewayResponseModel>
+            ) {
+                if (response.body()!!.status == 100) {
 
-    private class MyPrintWebViewClient : WebViewClient() {
-        override fun onPageFinished(view: WebView, url: String) {
-            //Calling a javascript function in html page
+                    var payment_url=response.body()!!.data.lists.payment_url
+                    var url=payment_url.replaceFirst("^(http[s]?://www\\\\.|http[s]?://|www\\\\.)","")
+                    mainLinear.visibility=View.GONE
+                    paymentWeb.visibility=View.VISIBLE
+                    Log.e("URL LOAD",url)
+                    paymentWeb.loadUrl(url)
 
-//            view.loadUrl(url);
-        }
+                } else {
 
-        override fun onPageStarted(view: WebView, url: String, favicon: Bitmap) {
-            super.onPageStarted(view, url, favicon)
+                }
+            }
 
-            //   Log.d("WebView", "print webpage loading.." + url);
-        }
+        })
     }
+
+
+//    private class MyPrintWebViewClient : WebViewClient() {
+//        override fun onPageFinished(view: WebView, url: String) {
+//            //Calling a javascript function in html page
+//
+////            view.loadUrl(url);
+//        }
+//
+//        override fun onPageStarted(view: WebView, url: String, favicon: Bitmap) {
+//            super.onPageStarted(view, url, favicon)
+//
+//            //   Log.d("WebView", "print webpage loading.." + url);
+//        }
+//    }
+
+
 
 
 }

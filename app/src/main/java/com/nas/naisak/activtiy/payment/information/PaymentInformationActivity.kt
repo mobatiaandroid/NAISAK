@@ -27,12 +27,13 @@ class PaymentInformationActivity : AppCompatActivity() {
     lateinit var mContext: Context
     var id: String = ""
     var title: String = ""
-    lateinit var titleTextView: TextView
+
     lateinit var primaryRecyclerdetails: RecyclerView
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var progress: ProgressBar
     lateinit var back: ImageView
     lateinit var logoclick: ImageView
+    lateinit var titleTextView: TextView
     var ibdetaillist = ArrayList<DetailListitems>()
 
 
@@ -56,7 +57,7 @@ class PaymentInformationActivity : AppCompatActivity() {
         primaryRecyclerdetails = findViewById(R.id.primaryRecyclerdetails)
         progress = findViewById(R.id.progress)
         primaryRecyclerdetails.layoutManager = linearLayoutManager
-        titleTextView.text = title
+        titleTextView.text = "Information"
 
         if (CommonMethods.isInternetAvailable(mContext)) {
             ibdetailslist()
@@ -82,6 +83,7 @@ class PaymentInformationActivity : AppCompatActivity() {
                 } else {
                     val intent = Intent(mContext, WebviewLoader::class.java)
                     intent.putExtra("webview_url", ibdetaillist[position].url)
+                    intent.putExtra("title", ibdetaillist[position].title)
                     startActivity(intent)
                 }
 

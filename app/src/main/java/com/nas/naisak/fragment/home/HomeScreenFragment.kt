@@ -393,7 +393,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
         }
         if (PreferenceManager.getButtonTwoRegTextImage(mContext)!!.toInt() != 0
         ) {
-            relImgtwo.setImageResource(R.drawable.notif)
+            relImgtwo.setImageResource(R.drawable.naeprogramme)
             var relTwoStr: String? = ""
             relTwoStr =
                 if (listitems[PreferenceManager
@@ -404,7 +404,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
                 ) {
                     JsonConstants.CCAS
                 } else {
-                    ClassNameConstants.NOTIFICATIONS
+                    ClassNameConstants.ABOUT_US
                 }
             relTxttwo.text = relTwoStr
             relTxttwo.setTextColor(ContextCompat.getColor(mContext, R.color.white))
@@ -536,7 +536,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
         if (PreferenceManager
                 .getButtonThreeRegTextImage(mContext)!!.toInt() != 0
         ) {
-            relImgthree.setImageResource(R.drawable.communication)
+            relImgthree.setImageResource(R.drawable.contacts)
             var relTwoStr: String? = ""
             relTwoStr = if (listitems[PreferenceManager
                     .getButtonThreeRegTextImage(mContext)!!.toInt()].equals(
@@ -546,7 +546,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
             ) {
                 JsonConstants.CCAS
             } else {
-                ClassNameConstants.COMMUNICATIONS
+                ClassNameConstants.CONTACT_US
             }
             relTxtthree.text = relTwoStr
             relTxtthree.setTextColor(ContextCompat.getColor(mContext, R.color.white))
@@ -678,7 +678,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
         if (PreferenceManager
                 .getButtonFourRegTextImage(mContext)!!.toInt() != 0
         ) {
-            relImgfour.setImageResource(R.drawable.payment)
+            relImgfour.setImageResource(R.drawable.settings_side)
             var relTwoStr: String? = ""
             relTwoStr = if (listitems[PreferenceManager
                     .getButtonFourRegTextImage(mContext)!!.toInt()].equals(
@@ -689,7 +689,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
                 JsonConstants.CCAS
             }
             else {
-                ClassNameConstants.PAYMENT
+                ClassNameConstants.SETTINGS
             }
             relTxtfour.text = relTwoStr
             relTxtfour.setTextColor(ContextCompat.getColor(mContext, R.color.white))
@@ -820,7 +820,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
 
         if (PreferenceManager.getButtonFiveRegTextImage(mContext)!!.toInt() != 0)
         {
-            relImgfive.setImageResource(R.drawable.parent)
+            relImgfive.setImageResource(R.drawable.notif)
             var relTwoStr: String? = ""
             relTwoStr = if (listitems[PreferenceManager
                     .getButtonFourRegTextImage(mContext)!!.toInt()].equals(
@@ -830,7 +830,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
             ) {
                 JsonConstants.CCAS
             } else {
-                ClassNameConstants.PARENT_ESSENTIALS
+                ClassNameConstants.NOTIFICATIONS
             }
             relTxtfive.text = relTwoStr
             relTxtfive.setTextColor(ContextCompat.getColor(mContext, R.color.white))
@@ -959,7 +959,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
 
         }
         if (PreferenceManager.getButtonSixRegTextImage(mContext)!!.toInt() != 0) {
-            relImgsix.setImageResource(R.drawable.aboutus
+            relImgsix.setImageResource(R.drawable.parent
             )
             var relTwoStr: String? = ""
             relTwoStr = if (listitems[PreferenceManager
@@ -970,7 +970,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
             ) {
                 JsonConstants .CCAS
             }  else {
-                ClassNameConstants.ABOUT_US
+                ClassNameConstants.PARENT_ESSENTIALS
             }
             relTxtsix.text = relTwoStr
             relTxtsix.setTextColor(ContextCompat.getColor(mContext, R.color.white))
@@ -1101,7 +1101,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
         if (PreferenceManager
                 .getButtonSevenRegTextImage(mContext)!!.toInt() != 0
         ) {
-            relImgseven.setImageResource(R.drawable.contacts
+            relImgseven.setImageResource(R.drawable.communication
             )
             var relTwoStr: String? = ""
             relTwoStr = if (listitems[PreferenceManager
@@ -1112,7 +1112,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
             ) {
                 JsonConstants.CCAS
             } else {
-                ClassNameConstants.CONTACT_US
+                ClassNameConstants.COMMUNICATIONS
             }
             relTxtseven.text = relTwoStr
             relTxtseven.setTextColor(ContextCompat.getColor(mContext, R.color.white))
@@ -1244,7 +1244,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
         if (PreferenceManager
                 .getButtonEightRegTextImage(mContext)!!.toInt() != 0
         ) {
-            relImgeight.setImageResource(R.drawable.settings_side
+            relImgeight.setImageResource(R.drawable.payment
             )
             var relTwoStr: String? = ""
             relTwoStr = if (listitems[PreferenceManager
@@ -1255,7 +1255,7 @@ class HomeScreenFragment : Fragment(), View.OnClickListener {
             ) {
                 JsonConstants.CCAS
             } else {
-                ClassNameConstants.SETTINGS
+                ClassNameConstants.PAYMENT
             }
             relTxteight.text = relTwoStr
             relTxteight.setTextColor(ContextCompat.getColor(mContext, R.color.white))

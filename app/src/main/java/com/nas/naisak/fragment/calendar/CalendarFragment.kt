@@ -504,11 +504,11 @@ class CalendarFragment  : Fragment() {
             }
             else if (selectedMonth.equals("NOV"))
             {
-                selectedMonthId=10
+                selectedMonthId=11
             }
             else if (selectedMonth.equals("DEC"))
             {
-                selectedMonthId=10
+                selectedMonthId=12
             }
             selectedYear=yearValues.get(mPosYear).toString()
             if (!selectedMonth.equals("MONTH") && !selectedYear.equals("YEAR"))
@@ -969,10 +969,7 @@ class CalendarFragment  : Fragment() {
                                 )
                                 try {
                                     val format2 = SimpleDateFormat("hh:mm a", Locale.ENGLISH)
-                                    if (!calendarDetailArrayList.get(i).details.get(j).starttime.equals(
-                                            ""
-                                        )
-                                    ) {
+                                    if (!calendarDetailArrayList.get(i).details.get(j).starttime.equals("")) {
                                         val dateStart = format1.parse(
                                             calendarDetailArrayList.get(i).details.get(
                                                 j

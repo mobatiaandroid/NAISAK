@@ -75,11 +75,17 @@ class PaymentFragment : Fragment() {
         paymentRelative.setOnClickListener(View.OnClickListener {
             val intent = Intent(activity, PaymentActivity::class.java)
             activity?.startActivity(intent)
+//            CommonMethods.showDialogueWithOk(mContext, "Comming Soon", "Alert")
         })
 
         informationRelative.setOnClickListener(View.OnClickListener {
             val intent = Intent(activity, PaymentInformationActivity::class.java)
             activity?.startActivity(intent)
+        })
+
+        sendEmail.setOnClickListener(View.OnClickListener {
+
+
         })
 
     }

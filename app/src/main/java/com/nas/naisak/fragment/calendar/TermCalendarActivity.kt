@@ -111,6 +111,7 @@ class TermCalendarActivity : AppCompatActivity(){
                 } else {
                     val intent = Intent(mContext, WebviewLoader::class.java)
                     intent.putExtra("webview_url", termListArrayList[position].url)
+                    intent.putExtra("title", termListArrayList[position].title)
                     startActivity(intent)
                 }
 

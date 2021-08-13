@@ -6,6 +6,7 @@ class AppController : MultiDexApplication(){
     companion object{
         var mTitles: String? = null
         lateinit var mInstance:AppController
+        var eventIdList=ArrayList<String>()
     }
     override fun onCreate() {
         super.onCreate()

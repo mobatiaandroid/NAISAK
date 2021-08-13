@@ -13,6 +13,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -44,6 +46,8 @@ class LoginActivity :Activity() {
     lateinit var guestButton:Button
     lateinit var loginImg:Button
     lateinit var emailTxt: EditText
+    lateinit var userNameRel: RelativeLayout
+    lateinit var passwordRel: RelativeLayout
     lateinit var progressDialog: ProgressBar
     lateinit var passwordEditTxt: EditText
     var isClicked:Boolean=false
@@ -64,6 +68,8 @@ class LoginActivity :Activity() {
         passwordEditTxt = findViewById(R.id.passwordEditText)
         guestButton = findViewById(R.id.guestButton)
         progressDialog = findViewById(R.id.progressDialog)
+        userNameRel = findViewById(R.id.userNameRel)
+        passwordRel = findViewById(R.id.passwordRel)
 //        emailTxt.setOnTouchListener(this)
 //        passwordEditTxt.setOnTouchListener(this)
         signupImg.setOnClickListener(View.OnClickListener {
@@ -121,16 +127,23 @@ class LoginActivity :Activity() {
                immq?.hideSoftInputFromWindow(passwordEditTxt.windowToken, 0)
                if (emailTxt.text.toString().trim().equals("")) {
                    // enter valid email
-                   CommonMethods.showDialogueWithOk(mContext, "Please enter Email.", "Alert")
+                   isClicked=false
+                   val shake = AnimationUtils.loadAnimation(mContext, R.anim.shake)
+                   userNameRel.startAnimation(shake)
+                  // CommonMethods.showDialogueWithOk(mContext, "Please enter Email.", "Alert")
 
                } else {
                    if (passwordEditTxt.text.toString().trim().equals("")) {
                        //enter password
-                       CommonMethods.showDialogueWithOk(mContext, "Please enter Password.", "Alert")
+                       isClicked=false
+                       val shake = AnimationUtils.loadAnimation(mContext, R.anim.shake)
+                       passwordRel.startAnimation(shake)
+                       //CommonMethods.showDialogueWithOk(mContext, "Please enter Password.", "Alert")
                    } else {
                        var emailPattern = CommonMethods.isEmailValid(emailTxt.text.toString().trim())
                        if (!emailPattern) {
                            //enter valid email
+                           isClicked=false
                            CommonMethods.showDialogueWithOk(mContext, "Please enter a valid Email.", "Alert")
                        } else {
                            if (CommonMethods.isInternetAvailable(mContext)) {
@@ -138,6 +151,7 @@ class LoginActivity :Activity() {
                                callLoginApi(emailTxt.text.toString().trim(), passwordEditTxt.text.toString().trim()
                                )
                            } else {
+                               isClicked=false
                                CommonMethods.showSuccessInternetAlert(mContext)
                            }
                        }
@@ -193,6 +207,10 @@ class LoginActivity :Activity() {
         var progressDialog:RelativeLayout=dialog.findViewById(R.id.progressDialog)
         progressDialog.visibility= View.GONE
         btn_maybelater?.text = "Maybe later";
+        btn_signup?.alpha=0.5f
+        btn_signup?.isClickable=false
+        var isSigned:Boolean=false
+        isClicked=false
         text_dialog?.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 text_dialog.isFocusable = false
@@ -204,34 +222,126 @@ class LoginActivity :Activity() {
                 false
             }
         }
+        text_dialog?.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {
+                if (!s.toString().trim().equals(""))
+                {
+                    Log.e("SIGN","COND : 1")
+                    val emailPattern =
+                        CommonMethods.isEmailValid(s.toString().trim())
+                    if (emailPattern)
+                    {
+                        Log.e("SIGN","COND : 2")
+                        btn_signup?.alpha=1.0f
+                        btn_signup?.isClickable=true
+                        isSigned=true
+                    }
+                    else{
+                        Log.e("SIGN","COND : 3")
+                        btn_signup?.alpha=0.5f
+                        btn_signup?.isClickable=false
+                        isSigned=false
+                    }
+                }
+                else{
+                    btn_signup?.alpha=0.5f
+                    btn_signup?.isClickable=false
+                    isSigned=false
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+                if (!s.toString().trim().equals(""))
+                {
+                    Log.e("SIGN","COND : 1")
+                    val emailPattern =
+                        CommonMethods.isEmailValid(s.toString().trim())
+                    if (emailPattern)
+                    {
+                        Log.e("SIGN","COND : 2")
+                        btn_signup?.alpha=1.0f
+                        btn_signup?.isClickable=true
+                        isSigned=true
+                    }
+                    else{
+                        Log.e("SIGN","COND : 3")
+                        btn_signup?.alpha=0.5f
+                        btn_signup?.isClickable=false
+                        isSigned=false
+                    }
+                }
+                else{
+                    btn_signup?.alpha=0.5f
+                    btn_signup?.isClickable=false
+                    isSigned=false
+                }
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                if (!s.toString().trim().equals(""))
+                {
+                    Log.e("SIGN","COND : 1")
+                    val emailPattern =
+                        CommonMethods.isEmailValid(s.toString().trim())
+                    if (emailPattern)
+                    {
+                        Log.e("SIGN","COND : 2")
+                        btn_signup?.alpha=1.0f
+                        btn_signup?.isClickable=true
+                        isSigned=true
+                    }
+                    else{
+                        Log.e("SIGN","COND : 3")
+                        btn_signup?.alpha=0.5f
+                        btn_signup?.isClickable=false
+                        isSigned=false
+                    }
+                }
+                else{
+                    btn_signup?.alpha=0.5f
+                    btn_signup?.isClickable=false
+                    isSigned=false
+                }
+            }
+        })
+
+
         val aniRotate: Animation =
             AnimationUtils.loadAnimation(mContext, R.anim.linear_interpolator)
         progressDialog.startAnimation(aniRotate)
         btn_signup?.setOnClickListener()
         {
-            if (text_dialog?.text.toString().trim().equals("")) {
-                CommonMethods.showDialogueWithOk(mContext, "Please enter Email.", "Alert")
-            } else {
+            if ( isSigned)
+            {
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                imm?.hideSoftInputFromWindow(text_dialog?.windowToken, 0)
+                val internetCheck = CommonMethods.isInternetAvailable(mContext)
+                if (internetCheck) {
+                    progressDialog.visibility= View.VISIBLE
+                    callSignUpApi(text_dialog?.text.toString().trim(), dialog,progressDialog)
 
-                val emailPattern =
-                    CommonMethods.isEmailValid(text_dialog?.text.toString().trim())
-                if (!emailPattern) {
-                    CommonMethods.showDialogueWithOk(mContext, "Please enter a valid Email.", "Alert")
                 } else {
-                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                    imm?.hideSoftInputFromWindow(text_dialog?.windowToken, 0)
-                    val internetCheck = CommonMethods.isInternetAvailable(mContext)
-                    if (internetCheck) {
-                        progressDialog.visibility= View.VISIBLE
-                        callSignUpApi(text_dialog?.text.toString().trim(), dialog,progressDialog)
-
-                    } else {
-                        CommonMethods.showSuccessInternetAlert(mContext)
-                    }
-
-
+                    CommonMethods.showSuccessInternetAlert(mContext)
                 }
             }
+
+//            if (text_dialog?.text.toString().trim().equals("")) {
+//                CommonMethods.showDialogueWithOk(mContext, "Please enter Email.", "Alert")
+//            } else {
+//
+//                val emailPattern =
+//                    CommonMethods.isEmailValid(text_dialog?.text.toString().trim())
+//                if (!emailPattern) {
+//                    CommonMethods.showDialogueWithOk(mContext, "Please enter a valid Email.", "Alert")
+//                } else {
+//
+//
+//
+//                }
+//            }
         }
         text_dialog?.setOnTouchListener { v, m -> // Perform tasks here
             text_dialog.isFocusable = true
@@ -240,6 +350,8 @@ class LoginActivity :Activity() {
         }
         btn_maybelater?.setOnClickListener()
         {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+            imm?.hideSoftInputFromWindow(text_dialog?.windowToken, 0)
             dialog.dismiss()
             isClicked=false
         }
@@ -330,7 +442,11 @@ class LoginActivity :Activity() {
         var btn_signup = dialog.findViewById(R.id.btn_signup) as? Button
         var progressDialog:RelativeLayout=dialog.findViewById(R.id.progressDialog)
         progressDialog.visibility= View.GONE
-        btn_maybelater?.text = "Maybe later";
+        btn_maybelater?.text = "Cancel";
+        btn_signup?.alpha=0.5f
+        btn_signup?.isClickable=false
+        var isSigned:Boolean=false
+        isClicked=false
         text_dialog?.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 text_dialog.isFocusable = false
@@ -342,34 +458,112 @@ class LoginActivity :Activity() {
                 false
             }
         }
+
+        text_dialog?.addTextChangedListener(object : TextWatcher {
+
+            override fun afterTextChanged(s: Editable) {
+                if (!s.toString().trim().equals(""))
+                {
+                    Log.e("SIGN","COND : 1")
+                    val emailPattern =
+                        CommonMethods.isEmailValid(s.toString().trim())
+                    if (emailPattern)
+                    {
+                        Log.e("SIGN","COND : 2")
+                        btn_signup?.alpha=1.0f
+                        btn_signup?.isClickable=true
+                        isSigned=true
+                    }
+                    else{
+                        Log.e("SIGN","COND : 3")
+                        btn_signup?.alpha=0.5f
+                        btn_signup?.isClickable=false
+                        isSigned=false
+                    }
+                }
+                else{
+                    btn_signup?.alpha=0.5f
+                    btn_signup?.isClickable=false
+                    isSigned=false
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int,
+                                           count: Int, after: Int) {
+                if (!s.toString().trim().equals(""))
+                {
+                    Log.e("SIGN","COND : 1")
+                    val emailPattern =
+                        CommonMethods.isEmailValid(s.toString().trim())
+                    if (emailPattern)
+                    {
+                        Log.e("SIGN","COND : 2")
+                        btn_signup?.alpha=1.0f
+                        btn_signup?.isClickable=true
+                        isSigned=true
+                    }
+                    else{
+                        Log.e("SIGN","COND : 3")
+                        btn_signup?.alpha=0.5f
+                        btn_signup?.isClickable=false
+                        isSigned=false
+                    }
+                }
+                else{
+                    btn_signup?.alpha=0.5f
+                    btn_signup?.isClickable=false
+                    isSigned=false
+                }
+            }
+
+            override fun onTextChanged(s: CharSequence, start: Int,
+                                       before: Int, count: Int) {
+                if (!s.toString().trim().equals(""))
+                {
+                    Log.e("SIGN","COND : 1")
+                    val emailPattern =
+                        CommonMethods.isEmailValid(s.toString().trim())
+                    if (emailPattern)
+                    {
+                        Log.e("SIGN","COND : 2")
+                        btn_signup?.alpha=1.0f
+                        btn_signup?.isClickable=true
+                        isSigned=true
+                    }
+                    else{
+                        Log.e("SIGN","COND : 3")
+                        btn_signup?.alpha=0.5f
+                        btn_signup?.isClickable=false
+                        isSigned=false
+                    }
+                }
+                else{
+                    btn_signup?.alpha=0.5f
+                    btn_signup?.isClickable=false
+                    isSigned=false
+                }
+            }
+        })
+
         val aniRotate: Animation =
             AnimationUtils.loadAnimation(mContext, R.anim.linear_interpolator)
         progressDialog.startAnimation(aniRotate)
         btn_signup?.setOnClickListener()
         {
-            if (text_dialog?.text.toString().trim().equals("")) {
-                CommonMethods.showDialogueWithOk(mContext, "Please enter Email.", "Alert")
-            } else {
+            if (isSigned)
+            {
+                val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                imm?.hideSoftInputFromWindow(text_dialog?.windowToken, 0)
+                val internetCheck = CommonMethods.isInternetAvailable(mContext)
+                if (internetCheck) {
+                    progressDialog.visibility= View.VISIBLE
+                    callForgotPassword(text_dialog?.text.toString().trim(), dialog,progressDialog)
 
-                val emailPattern =
-                    CommonMethods.isEmailValid(text_dialog?.text.toString().trim())
-                if (!emailPattern) {
-                    CommonMethods.showDialogueWithOk(mContext, "Please enter a valid Email.", "Alert")
                 } else {
-                    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                    imm?.hideSoftInputFromWindow(text_dialog?.windowToken, 0)
-                    val internetCheck = CommonMethods.isInternetAvailable(mContext)
-                    if (internetCheck) {
-                        progressDialog.visibility= View.VISIBLE
-                        callForgotPassword(text_dialog?.text.toString().trim(), dialog,progressDialog)
-
-                    } else {
-                        CommonMethods.showSuccessInternetAlert(mContext)
-                    }
-
-
+                    CommonMethods.showSuccessInternetAlert(mContext)
                 }
             }
+
         }
         text_dialog?.setOnTouchListener { v, m -> // Perform tasks here
             text_dialog.isFocusable = true
@@ -411,7 +605,7 @@ class LoginActivity :Activity() {
                             }
                             else
                             {
-                                isClicked=true
+                                isClicked=false
                                 showSuccessAlertForgot(mContext, message, "Alert", dialog,"open")
 
                             }
@@ -467,6 +661,7 @@ class LoginActivity :Activity() {
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 Log.e("Failed", t.localizedMessage)
                 progressDialog.visibility=View.GONE
+                isClicked=false
             }
 
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
@@ -476,6 +671,7 @@ class LoginActivity :Activity() {
                 if (responsedata != null) {
                     try {
                         val status=responsedata.status
+                        isClicked=false
                         Log.e("STATUS", status.toString())
                         if (status==100)
                         {
@@ -485,6 +681,8 @@ class LoginActivity :Activity() {
                         }
                         else
                         {
+
+                            dialogueWithOk(mContext,responsedata.message,"Alert","failure")
                           //  dialogueWithOk(mContext,responsedata.message,"Alert","error")
                         }
                     } catch (e: Exception) {

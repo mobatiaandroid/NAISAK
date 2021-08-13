@@ -81,6 +81,7 @@ class ParentsEssentialsFragment : Fragment() {
 
                 val intent = Intent(mContext, WebviewLoader::class.java)
                 intent.putExtra("webview_url", parentsEssentialArrayList[position].url)
+                intent.putExtra("title", parentsEssentialArrayList[position].title)
                 startActivity(intent)
 
             }

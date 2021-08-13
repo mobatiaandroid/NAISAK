@@ -73,7 +73,7 @@
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:layout_toRightOf="@+id/passwordImage"
-                    android:hint="Password"
+                    android:hint="PASSWORD"
                     android:inputType="textPassword"
                     android:singleLine="true" />
             </RelativeLayout>

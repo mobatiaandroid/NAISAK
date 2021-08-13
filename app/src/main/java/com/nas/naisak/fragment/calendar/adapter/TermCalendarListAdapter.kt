@@ -21,15 +21,13 @@ class TermCalendarListAdapter (private var mContext: Context, private var repoet
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var termname: TextView = view.findViewById(R.id.listTxtTitle)
-        var status: TextView = view.findViewById(R.id.status)
-        var statusLayout: RelativeLayout = view.findViewById(R.id.statusLayout)
 //        var clickLinear: LinearLayout = view.findViewById(R.id.clickLinear)
 
     }
     @NonNull
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.adapter_payment_recycler, parent, false)
+            .inflate(R.layout.adapter_parents_essential, parent, false)
         return MyViewHolder(itemView)
     }
 

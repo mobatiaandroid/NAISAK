@@ -74,7 +74,7 @@ class CommunicationFragment  : Fragment() {
         bannerImagePager=view!!.findViewById(R.id.bannerImagePager)
         sendEmail=view!!.findViewById(R.id.sendEmail)
         descriptionTV=view!!.findViewById(R.id.descriptionTV)
-        titleTextView.text="Parents Essentials"
+        titleTextView.text="Communications"
         mListView=view!!.findViewById(R.id.mListView)
         linearLayoutManager = LinearLayoutManager(mContext)
         mListView.layoutManager = linearLayoutManager
@@ -92,6 +92,7 @@ class CommunicationFragment  : Fragment() {
                 else{
                     val intent = Intent(mContext, WebviewLoader::class.java)
                     intent.putExtra("webview_url", parentsEssentialArrayListUse[position].url)
+                    intent.putExtra("title", parentsEssentialArrayListUse[position].title)
                     startActivity(intent)
                 }
 

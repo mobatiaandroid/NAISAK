@@ -246,6 +246,7 @@ class HomeActivity : AppCompatActivity(), AdapterView.OnItemLongClickListener {
 
         settings_icon.setOnClickListener {
             val fm = supportFragmentManager
+            settings_icon.visibility = View.INVISIBLE
             val currentFragment =
                 fm.findFragmentById(R.id.fragment_holder)
             if (drawer_layout.isDrawerOpen(linear_layout)) {
@@ -287,7 +288,7 @@ class HomeActivity : AppCompatActivity(), AdapterView.OnItemLongClickListener {
     }
 
     private fun replaceFragmentsSelected(position: Int) {
-        settings_icon.visibility = View.VISIBLE
+        settings_icon.visibility = View.INVISIBLE
         if (mFragment != null) {
             val fragmentManager = supportFragmentManager
             fragmentManager

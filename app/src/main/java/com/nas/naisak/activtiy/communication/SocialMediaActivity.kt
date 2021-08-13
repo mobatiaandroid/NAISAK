@@ -93,6 +93,7 @@ class SocialMediaActivity : AppCompatActivity() {
                 {
                     val intent = Intent(mContext, WebviewLoader::class.java)
                     intent.putExtra("webview_url", facebookArrayList.get(0).url)
+                    intent.putExtra("title", "Facebook")
                     startActivity(intent)
 
                 }
@@ -109,6 +110,7 @@ class SocialMediaActivity : AppCompatActivity() {
                 {
                     val intent = Intent(mContext, WebviewLoader::class.java)
                     intent.putExtra("webview_url", twitterArrayList.get(0).url)
+                    intent.putExtra("title", "Twitter")
                     startActivity(intent)
                 }
                 else{
@@ -125,6 +127,7 @@ class SocialMediaActivity : AppCompatActivity() {
                 {
                     val intent = Intent(mContext, WebviewLoader::class.java)
                     intent.putExtra("webview_url", instagramArrayList.get(0).url)
+                    intent.putExtra("title", "Instagram")
                     startActivity(intent)
                 }
                 else{
@@ -261,6 +264,7 @@ class SocialMediaActivity : AppCompatActivity() {
 
                 val intent = Intent(mContext, WebviewLoader::class.java)
                 intent.putExtra("webview_url", mediaList[position].url)
+                intent.putExtra("title", "Social Media")
                 startActivity(intent)
 
             }

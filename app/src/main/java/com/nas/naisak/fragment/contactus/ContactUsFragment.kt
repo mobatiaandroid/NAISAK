@@ -200,7 +200,7 @@ class ContactUsFragment : Fragment(), LocationListener,
                         MarkerOptions()
                             .position(latLng)
                             .draggable(true)
-                            .title("NAS Dubai")
+                            .title("NAIS ALKHOR")
                     )
 
 
@@ -216,11 +216,12 @@ class ContactUsFragment : Fragment(), LocationListener,
                             startActivity(callGPSSettingIntent)
                         } else {
                             val url =
-                                "http://maps.google.com/maps?saddr=$c_latitude,$c_longitude&daddr=Nord Anglia International School Dubai - Dubai - United Arab Emirates"
+                                "http://maps.google.com/maps?saddr=$c_latitude,$c_longitude&daddr=Nord Anglia International School Alkhor"
 
                             val intent = Intent(mContext, CustomwebviewMaps::class.java)
                             intent.putExtra("webview_url", url)
-                            this@ContactUsFragment.startActivity(intent)
+                            intent.putExtra("title", "NAISAK")
+                            mContext.startActivity(intent)
                         }
 
 

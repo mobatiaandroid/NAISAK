@@ -45,6 +45,17 @@ class PreferenceManager {
             val prefs = context.getSharedPreferences(PREFSNAME, Context.MODE_PRIVATE)
             return prefs.getString("user_code", "")
         }
+        /*************************setCalendarEventNames************************/
+        fun setCalendarEventNames(context: Context, usercode: String?) {
+            val prefs = context.getSharedPreferences(PREFSNAME, Context.MODE_PRIVATE)
+            val editor = prefs.edit()
+            editor.putString("cal_event", usercode)
+            editor.apply()
+        }
+        fun getCalendarEventNames(context: Context): String? {
+            val prefs = context.getSharedPreferences(PREFSNAME, Context.MODE_PRIVATE)
+            return prefs.getString("cal_event", "")
+        }
 
         /*************************USER EMAIL************************/
         fun setUserEmail(context: Context, useremail: String?) {

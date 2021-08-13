@@ -5,8 +5,8 @@ import com.google.gson.annotations.SerializedName
 class PaymentDetailDataModel (
     @SerializedName("id") val id: Int=0,
     @SerializedName("is_paid") val is_paid: Int=0,
-    @SerializedName("payment_id") val payment_id: Int=0,
-    @SerializedName("payment_type") val payment_type: Int=0,
+    @SerializedName("payment_id") val payment_id: String="",
+    @SerializedName("payment_type") val payment_type: String="",
     @SerializedName("category_name") val category_name: String="",
     @SerializedName("invoice_description") val invoice_description: String="",
     @SerializedName("amount") val amount: String="",
