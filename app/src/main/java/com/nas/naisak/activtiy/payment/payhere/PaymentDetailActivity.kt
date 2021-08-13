@@ -335,6 +335,7 @@ class PaymentDetailActivity  : AppCompatActivity(){
                     var url=payment_url.replaceFirst("^(http[s]?://www\\\\.|http[s]?://|www\\\\.)","")
                     mainLinear.visibility=View.GONE
                     paymentWeb.visibility=View.VISIBLE
+                    setWebViewSettingsPrint()
                     Log.e("URL LOAD",url)
                     paymentWeb.loadUrl(url)
 

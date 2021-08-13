@@ -5,6 +5,5 @@
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">naisakcore.mobatia.in:8081</domain>
         <domain includeSubdomains="true">naisakcore.mobatia.in</domain>
-        <domain includeSubdomains="true">sandbox.noqoodypay.com</domain>
     </domain-config>
 </network-security-config>
